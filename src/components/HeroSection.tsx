@@ -53,8 +53,7 @@ const HeroSection = () => {
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
             <div className="space-y-4">
               <h1 className="text-6xl lg:text-8xl font-bold leading-tight">
-                <span className="glow-text">Dennis</span>
-                <br />
+                <span className="glow-text">Dennis </span>
                 <span className="text-primary">Darius</span>
               </h1>
               
