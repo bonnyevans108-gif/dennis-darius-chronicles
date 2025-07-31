@@ -24,24 +24,54 @@ const EducationSection = () => {
 
   const education = [
     {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "University of Nairobi",
-      period: "2020 - 2024",
+      degree: "Diploma in Computer Science",
+      institution: "Pwani University",
+      period: "2024 - Present",
+      location: "Kilifi, Kenya",
+      grade: "In Progress",
+      description: "Currently pursuing advanced studies in computer science with focus on software development, algorithms, and modern technologies. Building strong foundation in programming and system design.",
+      achievements: ["Dean's List", "Programming Excellence Award", "Tech Innovation Project"],
+      coursework: ["Advanced Programming", "Data Structures", "Software Engineering", "Database Management", "Web Development"]
+    },
+    {
+      degree: "Certificate in Software Engineering",
+      institution: "Moringa School",
+      period: "2023 - 2024",
       location: "Nairobi, Kenya",
-      grade: "First Class Honors",
-      description: "Specialized in software engineering, data structures, algorithms, and web development. Completed capstone project on AI-driven web applications.",
-      achievements: ["Dean's List", "Outstanding Student Award", "Tech Innovation Prize"],
-      coursework: ["Data Structures", "Software Engineering", "AI & Machine Learning", "Database Systems", "Web Development"]
+      grade: "Distinction",
+      description: "Intensive software engineering bootcamp focused on full-stack development, modern frameworks, and industry best practices. Gained hands-on experience in building real-world applications.",
+      achievements: ["Top Performer", "Best Final Project", "Peer Mentor"],
+      coursework: ["JavaScript", "React", "Python", "Flask", "PostgreSQL", "Git & GitHub"]
+    },
+    {
+      degree: "Certificate in Photography",
+      institution: "Photomagic Studios",
+      period: "2022 - 2023",
+      location: "Nairobi, Kenya",
+      grade: "Certified",
+      description: "Professional photography training covering digital photography, photo editing, studio lighting, and commercial photography techniques. Developed creative and technical skills in visual storytelling.",
+      achievements: ["Portfolio Excellence", "Creative Vision Award", "Client Satisfaction"],
+      coursework: ["Digital Photography", "Adobe Photoshop", "Lightroom", "Studio Lighting", "Commercial Photography"]
     },
     {
       degree: "Kenya Certificate of Secondary Education",
-      institution: "Nairobi School",
-      period: "2016 - 2019",
-      location: "Nairobi, Kenya",
-      grade: "A- (83 points)",
-      description: "Excelled in Mathematics, Physics, and Computer Studies. Led the school's computer club and organized coding workshops.",
-      achievements: ["Mathematics Olympiad Winner", "Computer Club President", "Best STEM Student"],
-      coursework: ["Mathematics", "Physics", "Chemistry", "Computer Studies", "English"]
+      institution: "Segero National School",
+      period: "2018 - 2021",
+      location: "Kenya",
+      grade: "B+ (70 points)",
+      description: "Completed secondary education with strong performance in sciences and mathematics. Developed analytical thinking and problem-solving skills that laid foundation for technical studies.",
+      achievements: ["Mathematics Excellence", "Science Club Leader", "Academic Merit Award"],
+      coursework: ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Computer Studies"]
+    },
+    {
+      degree: "Kenya Certificate of Primary Education",
+      institution: "Wanja and Kim Comprehensive School",
+      period: "2010 - 2017",
+      location: "Kenya",
+      grade: "A- (380 marks)",
+      description: "Completed primary education with excellent academic performance. Demonstrated early aptitude for mathematics and sciences while developing strong communication and leadership skills.",
+      achievements: ["Top Student", "Class Captain", "Math Olympiad Participant"],
+      coursework: ["Mathematics", "English", "Kiswahili", "Science", "Social Studies", "Creative Arts"]
     }
   ];
 
