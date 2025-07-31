@@ -57,75 +57,101 @@ const EducationSection = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
-          {education.map((edu, index) => (
-            <Card 
-              key={index}
-              className={`group hover:shadow-xl transition-all duration-500 border-border/50 hover:border-primary/30 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <CardHeader className="pb-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <GraduationCap className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-xl text-foreground group-hover:text-primary transition-colors">
-                        {edu.degree}
-                      </CardTitle>
-                      <p className="text-primary font-semibold mt-1">{edu.institution}</p>
-                    </div>
-                  </div>
-                  <Badge variant="secondary" className="flex items-center gap-1">
-                    <Award className="w-3 h-3" />
-                    {edu.grade}
-                  </Badge>
-                </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            {/* Tree trunk/timeline */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-primary to-primary/50"></div>
+            
+            {education.map((edu, index) => (
+              <div 
+                key={index}
+                className={`relative mb-16 transition-all duration-1000 ${
+                  isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+                }`}
+                style={{ transitionDelay: `${index * 300}ms` }}
+              >
+                {/* Tree node/circle */}
+                <div className="absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-lg z-10"></div>
                 
-                <div className="flex items-center gap-4 text-sm text-muted-foreground mt-3">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    {edu.period}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <MapPin className="w-4 h-4" />
-                    {edu.location}
-                  </div>
-                </div>
-              </CardHeader>
-
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed">
-                  {edu.description}
-                </p>
-
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Key Achievements</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {edu.achievements.map((achievement, i) => (
-                      <Badge key={i} variant="outline" className="bg-accent/50">
-                        {achievement}
+                {/* Branch line */}
+                <div className="absolute left-9 top-8 w-8 h-0.5 bg-primary/30"></div>
+                
+                {/* Content container */}
+                <div className="ml-20 group">
+                  <div className="bg-card rounded-xl border border-border/50 p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/30 hover:translate-x-2">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
+                          <GraduationCap className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                            {edu.degree}
+                          </h3>
+                          <p className="text-primary font-semibold mt-1">{edu.institution}</p>
+                        </div>
+                      </div>
+                      <Badge variant="secondary" className="flex items-center gap-1 bg-primary/10 text-primary border-primary/20">
+                        <Award className="w-3 h-3" />
+                        {edu.grade}
                       </Badge>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                    
+                    {/* Period and location */}
+                    <div className="flex items-center gap-6 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        {edu.period}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4" />
+                        {edu.location}
+                      </div>
+                    </div>
 
-                <div>
-                  <h4 className="font-semibold text-foreground mb-2">Relevant Coursework</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {edu.coursework.map((course, i) => (
-                      <Badge key={i} variant="secondary" className="text-xs">
-                        {course}
-                      </Badge>
-                    ))}
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed mb-6">
+                      {edu.description}
+                    </p>
+
+                    {/* Achievements */}
+                    <div className="mb-4">
+                      <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                        <div className="w-1 h-4 bg-primary rounded"></div>
+                        Key Achievements
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.achievements.map((achievement, i) => (
+                          <Badge key={i} variant="outline" className="bg-accent/30 hover:bg-accent/50 transition-colors">
+                            {achievement}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Coursework */}
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                        <div className="w-1 h-4 bg-primary rounded"></div>
+                        Relevant Coursework
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {edu.coursework.map((course, i) => (
+                          <Badge key={i} variant="secondary" className="text-xs bg-muted/50 hover:bg-muted transition-colors">
+                            {course}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+            ))}
+            
+            {/* Tree end decoration */}
+            <div className="absolute left-6 -bottom-4 w-4 h-4 bg-primary/30 rounded-full border-4 border-background"></div>
+          </div>
         </div>
       </div>
     </section>
