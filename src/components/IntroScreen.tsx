@@ -195,7 +195,7 @@ const IntroScreen = ({ onComplete }: IntroScreenProps) => {
         </div>
 
         {/* Terminal-style output */}
-        <div className="mt-8 max-w-md mx-auto">
+        <div className="mt-12 mb-16 max-w-md mx-auto">
           <div className="bg-black/80 rounded-lg p-4 font-mono text-xs text-left border border-cyan-400/30 backdrop-blur-sm">
             <div className="text-green-400 mb-2">developer@dennis-portfolio:~$ initialize</div>
             <div className="text-gray-400 space-y-1">
