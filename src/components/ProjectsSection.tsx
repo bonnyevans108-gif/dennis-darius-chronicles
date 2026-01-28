@@ -25,55 +25,55 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with React, Node.js, and MongoDB. Features include user authentication, payment integration, and admin dashboard.',
-      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Tailwind CSS'],
+      title: 'Social Media App',
+      description: 'React.js social media application design. Built using React functional components and React Hooks for a modern, responsive social platform.',
+      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop',
+      technologies: ['React', 'JavaScript', 'CSS', 'Hooks'],
       liveUrl: '#',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/mukoyadariu/Socia-Media-App',
       featured: true
     },
     {
-      title: 'Photography Portfolio',
-      description: 'A responsive portfolio website showcasing photography work with image galleries, client testimonials, and contact forms.',
-      image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&h=400&fit=crop',
-      technologies: ['Next.js', 'TypeScript', 'Framer Motion', 'Tailwind CSS'],
+      title: 'Recipe Finder',
+      description: 'A web application that allows users to search for recipes and add comments to share their thoughts and feedback.',
+      image: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&h=400&fit=crop',
+      technologies: ['JavaScript', 'HTML', 'CSS', 'API'],
       liveUrl: '#',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/mukoyadariu/RECIPE-FINDER',
       featured: true
     },
     {
-      title: 'Red Cross Training App',
-      description: 'Mobile-first web application for first aid training modules and certification tracking for Red Cross volunteers.',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
-      technologies: ['React Native', 'Firebase', 'Node.js', 'Express'],
+      title: 'DDS Kitchen',
+      description: 'Experience the ultimate culinary journey at DDS Kitchen—Australia\'s finest dining destination. Exquisite flavors crafted with passion.',
+      image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
       liveUrl: '#',
-      githubUrl: '#',
+      githubUrl: 'https://github.com/mukoyadariu/DDS-KITCHEN',
       featured: true
     },
     {
-      title: 'Task Management Dashboard',
-      description: 'A collaborative project management tool with real-time updates, team chat, and progress tracking.',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop',
-      technologies: ['Vue.js', 'Socket.io', 'PostgreSQL', 'Redis'],
+      title: 'Pizza Restaurants API',
+      description: 'Flask-based API for managing pizza restaurants and their menus. Provides endpoints for CRUD operations on restaurants, pizzas, and associations.',
+      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
+      technologies: ['Python', 'Flask', 'SQLAlchemy', 'REST API'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/mukoyadariu/PIZZA-RESTAURANTS'
     },
     {
-      title: 'Weather Forecast App',
-      description: 'Beautiful weather application with location-based forecasts, interactive maps, and weather alerts.',
-      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop',
-      technologies: ['React', 'Weather API', 'Chart.js', 'PWA'],
+      title: 'Unheard',
+      description: 'Providing alternative perspectives on political discourse since 2023. A platform for diverse voices and viewpoints.',
+      image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/mukoyadariu/unheard'
     },
     {
-      title: 'Blog Platform',
-      description: 'A modern blogging platform with markdown support, SEO optimization, and social sharing features.',
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68e2c6b70?w=600&h=400&fit=crop',
-      technologies: ['Gatsby', 'GraphQL', 'Contentful', 'Netlify'],
+      title: 'Chef Clinton',
+      description: 'A professional chef portfolio website showcasing culinary expertise and services.',
+      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
       liveUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/mukoyadariu/CHEF-CLINTON'
     }
   ];
 
