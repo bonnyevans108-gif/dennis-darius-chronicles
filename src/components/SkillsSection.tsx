@@ -27,30 +27,30 @@ const SkillsSection = () => {
       icon: Code,
       title: 'Frontend Development',
       skills: [
-        { name: 'React / Next.js', level: 90 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'JavaScript (ES6+)', level: 88 }
+        { name: 'HTML5', level: 90 },
+        { name: 'CSS3', level: 88 },
+        { name: 'JavaScript (ES6+)', level: 85 },
+        { name: 'React.js', level: 80 }
       ]
     },
     {
       icon: Server,
       title: 'Backend Development',
       skills: [
-        { name: 'Node.js', level: 80 },
-        { name: 'Python', level: 75 },
-        { name: 'SQL / NoSQL', level: 70 },
-        { name: 'API Development', level: 82 }
+        { name: 'Python', level: 82 },
+        { name: 'Flask', level: 78 },
+        { name: 'SQLAlchemy', level: 75 },
+        { name: 'REST APIs', level: 80 }
       ]
     },
     {
       icon: Palette,
       title: 'Design & Tools',
       skills: [
-        { name: 'UI/UX Design', level: 78 },
-        { name: 'Figma', level: 85 },
-        { name: 'Git / GitHub', level: 90 },
-        { name: 'VS Code', level: 95 }
+        { name: 'Git / GitHub', level: 85 },
+        { name: 'VS Code', level: 90 },
+        { name: 'Responsive Design', level: 85 },
+        { name: 'UI/UX Basics', level: 75 }
       ]
     },
     {
@@ -77,10 +77,10 @@ const SkillsSection = () => {
       icon: Zap,
       title: 'Soft Skills',
       skills: [
-        { name: 'Problem Solving', level: 92 },
-        { name: 'Team Collaboration', level: 88 },
+        { name: 'Problem Solving', level: 88 },
+        { name: 'Team Collaboration', level: 85 },
         { name: 'Communication', level: 90 },
-        { name: 'Time Management', level: 85 }
+        { name: 'Time Management', level: 82 }
       ]
     }
   ];
@@ -142,8 +142,8 @@ const SkillsSection = () => {
           <h3 className="text-2xl font-semibold mb-8">Technologies I Work With</h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              'React', 'TypeScript', 'Node.js', 'Tailwind CSS', 'Next.js', 'Python',
-              'Git', 'Figma', 'MongoDB', 'PostgreSQL', 'Docker', 'AWS'
+              'HTML5', 'CSS3', 'JavaScript', 'React', 'Python', 'Flask',
+              'SQLAlchemy', 'Git', 'GitHub', 'REST APIs', 'PostgreSQL', 'VS Code'
             ].map((tech) => (
               <div
                 key={tech}
