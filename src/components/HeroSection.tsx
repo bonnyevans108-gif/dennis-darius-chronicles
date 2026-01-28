@@ -71,9 +71,11 @@ const HeroSection = () => {
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Get In Touch
               </Button>
-              <Button variant="outline" size="lg" className="group">
-                <Download className="mr-2 h-5 w-5 group-hover:bounce transition-transform" />
-                Download CV
+              <Button variant="outline" size="lg" className="group" asChild>
+                <a href="/DENNIS_MUKOYA_CV.docx" download>
+                  <Download className="mr-2 h-5 w-5 group-hover:bounce transition-transform" />
+                  Download CV
+                </a>
               </Button>
             </div>
 
