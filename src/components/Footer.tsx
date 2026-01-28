@@ -17,10 +17,9 @@ const Footer = () => {
       { name: 'Consulting', href: '#' }
     ],
     social: [
-      { name: 'GitHub', href: '#' },
-      { name: 'LinkedIn', href: '#' },
-      { name: 'Twitter', href: '#' },
-      { name: 'Instagram', href: '#' }
+      { name: 'GitHub', href: 'https://github.com/mukoyadariu' },
+      { name: 'Instagram', href: 'https://www.instagram.com/fw.darius._' },
+      { name: 'Portfolio', href: 'https://darius-2023.netlify.app/' }
     ]
   };
 
@@ -71,11 +70,11 @@ const Footer = () => {
             {/* Brand */}
             <div className="space-y-4">
               <div className="font-bold text-2xl glow-text">
-                Dennis<span className="text-primary">Darius</span>
+                Darius<span className="text-primary">Mukoya</span>
               </div>
               <p className="text-muted-foreground leading-relaxed">
-                Junior web developer passionate about creating beautiful digital experiences 
-                and serving the community through technology and first aid.
+                Welcome to my creative space! Here, technology meets artistry and compassion. 
+                Junior web developer at Pwani University.
               </p>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
@@ -88,7 +87,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <MapPin className="h-4 w-4" />
-                  <span>Nairobi, Kenya</span>
+                  <span>Kilifi, Kenya</span>
                 </div>
               </div>
             </div>
@@ -154,7 +153,7 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">
-              © {currentYear} Dennis Darius. All rights reserved.
+              © {currentYear} Darius Mukoya. All rights reserved.
             </p>
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <span>Made with</span>

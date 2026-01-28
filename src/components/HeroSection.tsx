@@ -53,8 +53,8 @@ const HeroSection = () => {
           <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
             <div className="space-y-4">
               <h1 className="text-6xl lg:text-8xl font-bold leading-tight">
-                <span className="glow-text">Dennis </span>
-                <span className="text-primary">Darius</span>
+                <span className="glow-text">Darius </span>
+                <span className="text-primary">Mukoya</span>
               </h1>
               
               <div className="text-xl lg:text-2xl text-muted-foreground">
@@ -62,7 +62,7 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg text-muted-foreground max-w-md leading-relaxed">
-                Passionate about creating beautiful, functional web experiences and helping others through technology and community service.
+                Welcome to my creative space! Here, technology meets artistry and compassion. Building meaningful digital experiences at Pwani University.
               </p>
             </div>
 
@@ -81,15 +81,30 @@ const HeroSection = () => {
 
             {/* Social links */}
             <div className="flex space-x-6 pt-4">
-              {['GitHub', 'LinkedIn', 'Twitter', 'Instagram'].map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
-                >
-                  {social}
-                </a>
-              ))}
+              <a
+                href="https://github.com/mukoyadariu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.instagram.com/fw.darius._"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://darius-2023.netlify.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300 hover:scale-110 transform"
+              >
+                Portfolio
+              </a>
             </div>
           </div>
 
@@ -99,7 +114,7 @@ const HeroSection = () => {
               <div className="liquid-container w-80 h-80 lg:w-96 lg:h-96 overflow-hidden">
                 <img
                   src={dennisPortrait}
-                  alt="Dennis Darius"
+                  alt="Darius Mukoya"
                   className="w-full h-full object-cover"
                 />
               </div>

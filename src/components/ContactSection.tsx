@@ -47,7 +47,7 @@ const ContactSection = () => {
     {
       icon: MapPin,
       title: 'Location',
-      value: 'Nairobi, Kenya',
+      value: 'Kilifi, Kenya',
       href: '#'
     }
   ];
@@ -113,20 +113,30 @@ const ContactSection = () => {
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-4">Follow Me</h3>
                 <div className="flex space-x-4">
-                  {[
-                    { name: 'GitHub', href: '#' },
-                    { name: 'LinkedIn', href: '#' },
-                    { name: 'Twitter', href: '#' },
-                    { name: 'Instagram', href: '#' }
-                  ].map((social) => (
-                    <a
-                      key={social.name}
-                      href={social.href}
-                      className="skill-badge px-4 py-2 rounded-full text-sm font-medium hover:scale-110 transition-transform"
-                    >
-                      {social.name}
-                    </a>
-                  ))}
+                  <a
+                    href="https://github.com/mukoyadariu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="skill-badge px-4 py-2 rounded-full text-sm font-medium hover:scale-110 transition-transform"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.instagram.com/fw.darius._"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="skill-badge px-4 py-2 rounded-full text-sm font-medium hover:scale-110 transition-transform"
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    href="https://darius-2023.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="skill-badge px-4 py-2 rounded-full text-sm font-medium hover:scale-110 transition-transform"
+                  >
+                    Portfolio
+                  </a>
                 </div>
               </CardContent>
             </Card>

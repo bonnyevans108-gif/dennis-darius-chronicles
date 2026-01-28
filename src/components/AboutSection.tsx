@@ -26,8 +26,8 @@ const AboutSection = () => {
     {
       icon: Code,
       title: 'Web Development',
-      description: 'Crafting modern, responsive web applications with cutting-edge technologies.',
-      skills: ['React', 'TypeScript', 'Node.js', 'Tailwind CSS']
+      description: 'Crafting modern, responsive web applications with HTML, CSS, JavaScript, React, and Python.',
+      skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Python', 'Flask']
     },
     {
       icon: Heart,
@@ -44,7 +44,7 @@ const AboutSection = () => {
     {
       icon: GraduationCap,
       title: 'Continuous Learning',
-      description: 'Always evolving and staying updated with the latest industry trends.',
+      description: 'Currently studying at Pwani University and Moringa School, always evolving.',
       skills: ['Problem Solving', 'Innovation', 'Collaboration', 'Mentoring']
     }
   ];
@@ -57,9 +57,9 @@ const AboutSection = () => {
             About <span className="text-primary">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I'm Dennis Darius, a passionate junior web developer with a unique blend of technical skills 
-            and community service experience. My journey combines coding excellence with humanitarian values, 
-            creating meaningful digital solutions while serving my community.
+            I'm Darius Mukoya, a passionate junior web developer studying at Pwani University and Moringa School. 
+            Welcome to my creative space where technology meets artistry and compassion. 
+            I create meaningful digital solutions while serving my community.
           </p>
         </div>
 
@@ -100,8 +100,8 @@ const AboutSection = () => {
         {/* Personal stats */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
           {[
-            { number: '50+', label: 'Projects Completed' },
-            { number: '2+', label: 'Years Experience' },
+            { number: '10+', label: 'Projects Completed' },
+            { number: '2+', label: 'Years Learning' },
             { number: '100+', label: 'People Helped' },
             { number: '24/7', label: 'Ready to Code' }
           ].map((stat, index) => (
