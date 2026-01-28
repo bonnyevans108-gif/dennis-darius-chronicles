@@ -58,9 +58,9 @@ const EducationSection = () => {
       institution: "Segero National School",
       period: "2018 - 2021",
       location: "Kenya",
-      grade: "B+ (70 points)",
-      description: "Completed secondary education with strong performance in sciences and mathematics. Developed analytical thinking and problem-solving skills that laid foundation for technical studies.",
-      achievements: ["Mathematics Excellence", "Science Club Leader", "Academic Merit Award"],
+      grade: "C Plain",
+      description: "Completed secondary education developing analytical thinking and problem-solving skills that laid foundation for technical studies.",
+      achievements: ["Perseverance", "Team Player", "Personal Growth"],
       coursework: ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Computer Studies"]
     },
     {
@@ -68,9 +68,9 @@ const EducationSection = () => {
       institution: "Wanja and Kim Comprehensive School",
       period: "2010 - 2017",
       location: "Kenya",
-      grade: "A- (380 marks)",
-      description: "Completed primary education with excellent academic performance. Demonstrated early aptitude for mathematics and sciences while developing strong communication and leadership skills.",
-      achievements: ["Top Student", "Class Captain", "Math Olympiad Participant"],
+      grade: "377 Marks",
+      description: "Completed primary education with solid academic performance. Demonstrated early aptitude for learning and developed strong communication and leadership skills.",
+      achievements: ["Consistent Performance", "Active Participant", "Team Collaboration"],
       coursework: ["Mathematics", "English", "Kiswahili", "Science", "Social Studies", "Creative Arts"]
     }
   ];
