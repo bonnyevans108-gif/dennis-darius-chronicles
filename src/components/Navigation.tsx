@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const Navigation = () => {
@@ -60,6 +61,13 @@ const Navigation = () => {
                 {item.name}
               </button>
             ))}
+            <Link 
+              to="/certificates" 
+              className="flex items-center gap-1 text-foreground hover:text-primary transition-colors duration-300"
+            >
+              <Award className="h-4 w-4" />
+              Certificates
+            </Link>
             <ThemeToggle />
           </div>
 
@@ -89,6 +97,14 @@ const Navigation = () => {
                   {item.name}
                 </button>
               ))}
+              <Link 
+                to="/certificates" 
+                className="flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300 py-2"
+                onClick={() => setIsOpen(false)}
+              >
+                <Award className="h-4 w-4" />
+                Certificates
+              </Link>
             </div>
           </div>
         )}
