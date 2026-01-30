@@ -5,8 +5,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Coffee, Download, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import MpesaPaymentModal from './MpesaPaymentModal';
 
 const ContactSection = () => {
+  const [isMpesaModalOpen, setIsMpesaModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -98,7 +100,12 @@ const ContactSection = () => {
 
             {/* Action Buttons */}
             <div className="space-y-4">
-              <Button variant="hero" size="lg" className="w-full group">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="w-full group"
+                onClick={() => setIsMpesaModalOpen(true)}
+              >
                 <Coffee className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
                 Buy Me a Coffee
               </Button>
@@ -201,6 +208,11 @@ const ContactSection = () => {
           </Card>
         </div>
       </div>
+
+      <MpesaPaymentModal 
+        isOpen={isMpesaModalOpen} 
+        onClose={() => setIsMpesaModalOpen(false)} 
+      />
     </section>
   );
 };
