@@ -25,36 +25,6 @@ const BlogSection = () => {
 
   const blogPosts = [
     {
-      id: 1,
-      title: 'Getting Started with React and TypeScript: A Developer\'s Journey',
-      excerpt: 'Sharing my experience transitioning from vanilla JavaScript to React with TypeScript. Here are the key lessons I learned and tips for fellow developers.',
-      content: 'As a junior developer, making the leap from vanilla JavaScript to React with TypeScript felt overwhelming at first...',
-      author: 'Dennis Darius',
-      date: '2024-01-15',
-      readTime: '5 min read',
-      category: 'Web Development',
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop',
-      tags: ['React', 'TypeScript', 'JavaScript', 'Frontend'],
-      likes: 42,
-      comments: 12,
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'First Aid in the Digital Age: How Technology Saves Lives',
-      excerpt: 'Exploring how mobile apps and digital tools are revolutionizing emergency response and first aid training in communities.',
-      content: 'During my time as a Red Cross volunteer, I\'ve witnessed firsthand how technology can enhance emergency response...',
-      author: 'Dennis Darius',
-      date: '2024-01-10',
-      readTime: '7 min read',
-      category: 'Community Service',
-      image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop',
-      tags: ['First Aid', 'Technology', 'Red Cross', 'Community'],
-      likes: 38,
-      comments: 8,
-      featured: true
-    },
-    {
       id: 3,
       title: 'Photography Meets Code: Creating Dynamic Image Galleries',
       excerpt: 'Combining my passion for photography with web development to create stunning, interactive image galleries that tell stories.',
