@@ -152,11 +152,11 @@ const BlogSection = () => {
         </div>
 
         {/* Featured Posts */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid lg:grid-cols-2 gap-8 mb-12 items-stretch">
           {filteredPosts.filter(post => post.featured).map((post, index) => (
             <Card
               key={post.id}
-              className={`hero-card border-border/50 backdrop-blur-sm overflow-hidden group ${
+              className={`hero-card border-border/50 backdrop-blur-sm overflow-hidden group flex flex-col h-full ${
                 isVisible ? 'animate-fade-in-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
@@ -192,8 +192,8 @@ const BlogSection = () => {
                 </h3>
               </CardHeader>
 
-              <CardContent>
-                <p className="text-muted-foreground line-clamp-3 mb-4">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-muted-foreground line-clamp-3 mb-4 flex-1">
                   {post.excerpt}
                 </p>
                 
@@ -234,11 +234,11 @@ const BlogSection = () => {
         </div>
 
         {/* Regular Posts Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {filteredPosts.filter(post => !post.featured).map((post, index) => (
             <Card
               key={post.id}
-              className={`hero-card border-border/50 backdrop-blur-sm overflow-hidden group ${
+              className={`hero-card border-border/50 backdrop-blur-sm overflow-hidden group flex flex-col h-full ${
                 isVisible ? 'animate-fade-in-up' : 'opacity-0'
               }`}
               style={{ animationDelay: `${index * 0.1 + 0.5}s` }}
@@ -271,8 +271,8 @@ const BlogSection = () => {
                 </h3>
               </CardHeader>
 
-              <CardContent>
-                <p className="text-muted-foreground line-clamp-2 mb-4 text-sm">
+              <CardContent className="flex-1 flex flex-col">
+                <p className="text-muted-foreground line-clamp-2 mb-4 text-sm flex-1">
                   {post.excerpt}
                 </p>
                 
