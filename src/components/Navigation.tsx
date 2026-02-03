@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Award } from 'lucide-react';
+import { Menu, X, Award, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isAdmin } = useAuth();
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -68,6 +70,15 @@ const Navigation = () => {
               <Award className="h-4 w-4" />
               Certificates
             </Link>
+            {isAdmin && (
+              <Link 
+                to="/admin" 
+                className="flex items-center gap-1 text-foreground hover:text-primary transition-colors duration-300"
+              >
+                <Settings className="h-4 w-4" />
+                Admin
+              </Link>
+            )}
             <ThemeToggle />
           </div>
 
@@ -105,6 +116,16 @@ const Navigation = () => {
                 <Award className="h-4 w-4" />
                 Certificates
               </Link>
+              {isAdmin && (
+                <Link 
+                  to="/admin" 
+                  className="flex items-center gap-2 text-foreground hover:text-primary transition-colors duration-300 py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Settings className="h-4 w-4" />
+                  Admin
+                </Link>
+              )}
             </div>
           </div>
         )}
