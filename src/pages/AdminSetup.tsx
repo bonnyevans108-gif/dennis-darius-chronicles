@@ -64,27 +64,12 @@ const AdminSetup = () => {
       }
 
       if (authData.user) {
-        // Add admin role - wait a moment for the trigger to create the profile
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const { error: roleError } = await supabase
-          .from('user_roles')
-          .insert([{ user_id: authData.user.id, role: 'admin' }]);
-
-        if (roleError) {
-          console.error('Error adding admin role:', roleError);
-          toast({
-            title: 'Warning',
-            description: 'Account created but admin role assignment failed. You may need to assign it manually.',
-            variant: 'destructive',
-          });
-        } else {
-          toast({
-            title: 'Admin Account Created!',
-            description: 'Please check your email to verify your account, then log in.',
-          });
-          navigate('/admin/login');
-        }
+        // The database trigger will automatically assign admin role to the first user
+        toast({
+          title: 'Admin Account Created!',
+          description: 'Please check your email to verify your account, then log in.',
+        });
+        navigate('/admin/login');
       }
     } catch (error) {
       toast({
