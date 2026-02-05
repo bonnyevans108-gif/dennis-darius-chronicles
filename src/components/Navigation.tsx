@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Award, Settings } from 'lucide-react';
+import { Menu, X, Award, Settings, LogIn, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useAuth } from '@/contexts/AuthContext';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { isAdmin } = useAuth();
+  const { user, isAdmin, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const navItems = [
     { name: 'Home', href: '#home' },
@@ -34,6 +35,17 @@ const Navigation = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+    setIsOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    navigate('/admin/login');
     setIsOpen(false);
   };
 
@@ -80,6 +92,29 @@ const Navigation = () => {
               </Link>
             )}
             <ThemeToggle />
+            
+            {/* Auth Button */}
+            {user ? (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleSignOut}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleLoginClick}
+                className="flex items-center gap-2"
+              >
+                <LogIn className="h-4 w-4" />
+                Login
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -126,6 +161,29 @@ const Navigation = () => {
                   Admin
                 </Link>
               )}
+              
+              {/* Mobile Auth Button */}
+              <div className="pt-4 border-t border-border">
+                {user ? (
+                  <Button 
+                    variant="outline" 
+                    className="w-full flex items-center justify-center gap-2"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Logout
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="outline" 
+                    className="w-full flex items-center justify-center gap-2"
+                    onClick={handleLoginClick}
+                  >
+                    <LogIn className="h-4 w-4" />
+                    Login
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         )}

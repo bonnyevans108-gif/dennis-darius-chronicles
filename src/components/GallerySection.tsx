@@ -4,11 +4,23 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Heart, Download, Eye, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { supabase } from '@/integrations/supabase/client';
+
+interface GalleryImage {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string;
+  category: string | null;
+  featured: boolean | null;
+}
 
 const GallerySection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [galleryImages, setGalleryImages] = useState<GalleryImage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,124 +38,32 @@ const GallerySection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const galleryImages = [
-    {
-      id: 1,
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      title: 'Mountain Sunrise',
-      category: 'Landscape',
-      description: 'Captured during an early morning hike in the Kenyan highlands',
-      camera: 'Canon EOS R5',
-      settings: 'f/8, 1/125s, ISO 100',
-      likes: 124,
-      views: 1250,
-      featured: true
-    },
-    {
-      id: 2,
-      src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
-      title: 'Tech Professional',
-      category: 'Portrait',
-      description: 'Corporate headshot session for a fellow developer',
-      camera: 'Sony A7 III',
-      settings: 'f/2.8, 1/200s, ISO 400',
-      likes: 89,
-      views: 890,
-      featured: true
-    },
-    {
-      id: 3,
-      src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
-      title: 'Red Cross Training',
-      category: 'Event',
-      description: 'Documenting first aid training session in rural Kenya',
-      camera: 'Canon EOS R6',
-      settings: 'f/4, 1/160s, ISO 800',
-      likes: 156,
-      views: 2100,
-      featured: false
-    },
-    {
-      id: 4,
-      src: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=600&fit=crop',
-      title: 'Urban Architecture',
-      category: 'Architecture',
-      description: 'Modern buildings in Nairobi\'s business district',
-      camera: 'Fujifilm X-T4',
-      settings: 'f/11, 1/250s, ISO 200',
-      likes: 67,
-      views: 780,
-      featured: false
-    },
-    {
-      id: 5,
-      src: 'https://images.unsplash.com/photo-1494790108755-2616b332d2e9?w=800&h=600&fit=crop',
-      title: 'Creative Portrait',
-      category: 'Portrait',
-      description: 'Studio portrait with creative lighting techniques',
-      camera: 'Canon EOS R5',
-      settings: 'f/1.8, 1/125s, ISO 250',
-      likes: 203,
-      views: 1800,
-      featured: true
-    },
-    {
-      id: 6,
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      title: 'Wildlife Safari',
-      category: 'Wildlife',
-      description: 'African wildlife in their natural habitat',
-      camera: 'Canon EOS R6',
-      settings: 'f/5.6, 1/500s, ISO 1600',
-      likes: 298,
-      views: 3200,
-      featured: false
-    },
-    {
-      id: 7,
-      src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop',
-      title: 'Community Event',
-      category: 'Event',
-      description: 'Local community gathering and celebration',
-      camera: 'Sony A7 III',
-      settings: 'f/3.5, 1/200s, ISO 640',
-      likes: 145,
-      views: 1450,
-      featured: false
-    },
-    {
-      id: 8,
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&h=600&fit=crop',
-      title: 'Tech Workspace',
-      category: 'Lifestyle',
-      description: 'Modern workspace setup for developers',
-      camera: 'Fujifilm X-T4',
-      settings: 'f/2.8, 1/60s, ISO 320',
-      likes: 112,
-      views: 1120,
-      featured: false
-    },
-    {
-      id: 9,
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
-      title: 'Sunset Silhouette',
-      category: 'Landscape',
-      description: 'Golden hour photography at the coast',
-      camera: 'Canon EOS R5',
-      settings: 'f/16, 1/60s, ISO 100',
-      likes: 187,
-      views: 2300,
-      featured: true
-    }
-  ];
+  useEffect(() => {
+    const fetchGalleryImages = async () => {
+      const { data, error } = await supabase
+        .from('gallery_images')
+        .select('*')
+        .eq('published', true)
+        .order('display_order', { ascending: true });
 
-  const categories = ['All', 'Portrait', 'Landscape', 'Event', 'Architecture', 'Wildlife', 'Lifestyle'];
+      if (error) {
+        console.error('Error fetching gallery images:', error);
+      } else {
+        setGalleryImages(data || []);
+      }
+      setIsLoading(false);
+    };
+
+    fetchGalleryImages();
+  }, []);
+
+  const categories = ['All', ...new Set(galleryImages.map(image => image.category).filter(Boolean) as string[])];
 
   const filteredImages = selectedCategory === 'All' 
     ? galleryImages 
     : galleryImages.filter(image => image.category === selectedCategory);
 
-  const openLightbox = (imageId: number) => {
+  const openLightbox = (imageId: string) => {
     setSelectedImage(imageId);
   };
 
@@ -167,6 +87,35 @@ const GallerySection = () => {
   };
 
   const currentImage = selectedImage ? filteredImages.find(img => img.id === selectedImage) : null;
+
+  if (isLoading) {
+    return (
+      <section id="gallery" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">Loading gallery...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (galleryImages.length === 0) {
+    return (
+      <section id="gallery" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
+              Photo <span className="text-primary">Gallery</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Gallery coming soon! Check back later for photography work spanning portraits, landscapes, events, and more.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="gallery" className="py-20 bg-muted/30">
@@ -210,7 +159,7 @@ const GallerySection = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={image.src}
+                  src={image.image_url}
                   alt={image.title}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -223,9 +172,11 @@ const GallerySection = () => {
                 <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
                   Featured
                 </Badge>
-                <Badge variant="secondary" className="absolute top-4 right-4">
-                  {image.category}
-                </Badge>
+                {image.category && (
+                  <Badge variant="secondary" className="absolute top-4 right-4">
+                    {image.category}
+                  </Badge>
+                )}
               </div>
               
               <CardContent className="p-4">
@@ -235,20 +186,6 @@ const GallerySection = () => {
                 <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                   {image.description}
                 </p>
-                
-                <div className="flex items-center justify-between text-sm text-muted-foreground">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex items-center space-x-1">
-                      <Heart className="h-4 w-4" />
-                      <span>{image.likes}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Eye className="h-4 w-4" />
-                      <span>{image.views}</span>
-                    </div>
-                  </div>
-                  <span className="text-xs">{image.camera}</span>
-                </div>
               </CardContent>
             </Card>
           ))}
@@ -267,34 +204,24 @@ const GallerySection = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={image.src}
+                  src={image.image_url}
                   alt={image.title}
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <Eye className="h-6 w-6 text-white" />
                 </div>
-                <Badge variant="secondary" className="absolute top-2 right-2 text-xs">
-                  {image.category}
-                </Badge>
+                {image.category && (
+                  <Badge variant="secondary" className="absolute top-2 right-2 text-xs">
+                    {image.category}
+                  </Badge>
+                )}
               </div>
               
               <CardContent className="p-3">
                 <h4 className="font-medium mb-1 group-hover:text-primary transition-colors text-sm">
                   {image.title}
                 </h4>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <div className="flex items-center space-x-2">
-                    <div className="flex items-center space-x-1">
-                      <Heart className="h-3 w-3" />
-                      <span>{image.likes}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Eye className="h-3 w-3" />
-                      <span>{image.views}</span>
-                    </div>
-                  </div>
-                </div>
               </CardContent>
             </Card>
           ))}
@@ -362,7 +289,7 @@ const GallerySection = () => {
               {/* Image */}
               <div className="flex flex-col items-center justify-center w-full h-full p-8">
                 <img
-                  src={currentImage.src}
+                  src={currentImage.image_url}
                   alt={currentImage.title}
                   className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
                 />
@@ -371,20 +298,6 @@ const GallerySection = () => {
                 <div className="mt-6 text-center text-white space-y-2">
                   <h3 className="text-2xl font-bold">{currentImage.title}</h3>
                   <p className="text-gray-300">{currentImage.description}</p>
-                  <div className="flex items-center justify-center space-x-6 text-sm text-gray-400">
-                    <span>{currentImage.camera}</span>
-                    <span>{currentImage.settings}</span>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <Heart className="h-4 w-4" />
-                        <span>{currentImage.likes}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Eye className="h-4 w-4" />
-                        <span>{currentImage.views}</span>
-                      </div>
-                    </div>
-                  </div>
                   <Button variant="outline" size="sm" className="mt-4">
                     <Download className="mr-2 h-4 w-4" />
                     Download

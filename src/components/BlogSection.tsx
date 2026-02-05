@@ -3,9 +3,29 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, ArrowRight, User, Heart, MessageCircle } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string | null;
+  content: string | null;
+  author: string;
+  created_at: string;
+  read_time: string | null;
+  category: string;
+  image_url: string | null;
+  tags: string[] | null;
+  likes: number | null;
+  comments: number | null;
+  featured: boolean | null;
+}
 
 const BlogSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,75 +43,59 @@ const BlogSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const blogPosts = [
-    {
-      id: 3,
-      title: 'Photography Meets Code: Creating Dynamic Image Galleries',
-      excerpt: 'Combining my passion for photography with web development to create stunning, interactive image galleries that tell stories.',
-      content: 'Photography and programming might seem like different worlds, but they share more similarities than you might think...',
-      author: 'Dennis Darius',
-      date: '2024-01-05',
-      readTime: '6 min read',
-      category: 'Photography',
-      image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&h=400&fit=crop',
-      tags: ['Photography', 'Web Dev', 'Gallery', 'Creative'],
-      likes: 31,
-      comments: 15,
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'Building Responsive Websites: Mobile-First Approach',
-      excerpt: 'Why starting with mobile design leads to better user experiences and how to implement responsive design effectively.',
-      content: 'In today\'s mobile-centric world, responsive design isn\'t just nice to have—it\'s essential...',
-      author: 'Dennis Darius',
-      date: '2023-12-28',
-      readTime: '4 min read',
-      category: 'Web Development',
-      image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop',
-      tags: ['Responsive', 'Mobile', 'CSS', 'UX'],
-      likes: 25,
-      comments: 6,
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'Community Impact Through Technology: My Red Cross Experience',
-      excerpt: 'How I\'ve used my programming skills to enhance Red Cross training programs and improve community emergency preparedness.',
-      content: 'Volunteering with the Red Cross has taught me that technology can be a powerful force for social good...',
-      author: 'Dennis Darius',
-      date: '2023-12-20',
-      readTime: '8 min read',
-      category: 'Community Service',
-      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop',
-      tags: ['Red Cross', 'Community', 'Impact', 'Technology'],
-      likes: 55,
-      comments: 22,
-      featured: false
-    },
-    {
-      id: 6,
-      title: 'The Art of Clean Code: Lessons from Photography',
-      excerpt: 'What photography composition techniques taught me about writing clean, maintainable code.',
-      content: 'Both photography and coding are forms of creative expression that benefit from clear structure and thoughtful composition...',
-      author: 'Dennis Darius',
-      date: '2023-12-15',
-      readTime: '5 min read',
-      category: 'Programming',
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop',
-      tags: ['Clean Code', 'Photography', 'Best Practices'],
-      likes: 33,
-      comments: 9,
-      featured: false
-    }
-  ];
+  useEffect(() => {
+    const fetchBlogPosts = async () => {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
 
-  const categories = ['All', 'Web Development', 'Community Service', 'Photography', 'Programming'];
-  const [selectedCategory, setSelectedCategory] = useState('All');
+      if (error) {
+        console.error('Error fetching blog posts:', error);
+      } else {
+        setBlogPosts(data || []);
+      }
+      setIsLoading(false);
+    };
+
+    fetchBlogPosts();
+  }, []);
+
+  const categories = ['All', ...new Set(blogPosts.map(post => post.category))];
 
   const filteredPosts = selectedCategory === 'All' 
     ? blogPosts 
     : blogPosts.filter(post => post.category === selectedCategory);
+
+  if (isLoading) {
+    return (
+      <section id="blog" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">Loading blog posts...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (blogPosts.length === 0) {
+    return (
+      <section id="blog" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
+              My <span className="text-primary">Blog</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Blog posts coming soon! Check back later for insights on development, photography, and community service.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="blog" className="py-20">
@@ -133,7 +137,7 @@ const BlogSection = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={post.image}
+                  src={post.image_url || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop'}
                   alt={post.title}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -150,11 +154,11 @@ const BlogSection = () => {
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>{new Date(post.created_at).toLocaleDateString()}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Clock className="h-4 w-4" />
-                    <span>{post.readTime}</span>
+                    <span>{post.read_time || '5 min read'}</span>
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold group-hover:text-primary transition-colors line-clamp-2">
@@ -168,7 +172,7 @@ const BlogSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.slice(0, 3).map((tag) => (
+                  {(post.tags || []).slice(0, 3).map((tag) => (
                     <Badge key={tag} variant="secondary" className="skill-badge text-xs">
                       {tag}
                     </Badge>
@@ -179,11 +183,11 @@ const BlogSection = () => {
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-1">
                       <Heart className="h-4 w-4" />
-                      <span>{post.likes}</span>
+                      <span>{post.likes || 0}</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <MessageCircle className="h-4 w-4" />
-                      <span>{post.comments}</span>
+                      <span>{post.comments || 0}</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-1">
@@ -215,7 +219,7 @@ const BlogSection = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={post.image}
+                  src={post.image_url || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop'}
                   alt={post.title}
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -229,11 +233,11 @@ const BlogSection = () => {
                 <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>{new Date(post.created_at).toLocaleDateString()}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <Clock className="h-4 w-4" />
-                    <span>{post.readTime}</span>
+                    <span>{post.read_time || '5 min read'}</span>
                   </div>
                 </div>
                 <h3 className="text-lg font-semibold group-hover:text-primary transition-colors line-clamp-2">
@@ -247,7 +251,7 @@ const BlogSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags.slice(0, 2).map((tag) => (
+                  {(post.tags || []).slice(0, 2).map((tag) => (
                     <Badge key={tag} variant="secondary" className="skill-badge text-xs">
                       {tag}
                     </Badge>
@@ -258,11 +262,11 @@ const BlogSection = () => {
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1">
                       <Heart className="h-4 w-4" />
-                      <span>{post.likes}</span>
+                      <span>{post.likes || 0}</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <MessageCircle className="h-4 w-4" />
-                      <span>{post.comments}</span>
+                      <span>{post.comments || 0}</span>
                     </div>
                   </div>
                 </div>
