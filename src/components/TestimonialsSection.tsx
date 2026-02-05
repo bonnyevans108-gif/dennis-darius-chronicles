@@ -3,53 +3,23 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Testimonial {
+  id: string;
+  name: string;
+  role: string | null;
+  company: string | null;
+  avatar_url: string | null;
+  content: string;
+  rating: number | null;
+}
 
 const TestimonialsSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-
-  const testimonials = [
-    {
-      name: 'Sarah Mitchell',
-      role: 'Project Manager',
-      company: 'TechCorp Solutions',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b332d2e9?w=400&h=400&fit=crop&crop=face',
-      content: 'Dennis is an exceptional developer with a keen eye for detail. His ability to translate complex requirements into beautiful, functional code is remarkable. The Red Cross project he worked on saved our team weeks of development time.',
-      rating: 5
-    },
-    {
-      name: 'Michael Chen',
-      role: 'Senior Developer',
-      company: 'Digital Innovations',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-      content: 'Working with Dennis has been a pleasure. His technical skills combined with his first aid expertise brought a unique perspective to our healthcare app project. He\'s reliable, creative, and always delivers quality work.',
-      rating: 5
-    },
-    {
-      name: 'Emma Rodriguez',
-      role: 'UX Designer',
-      company: 'Creative Studio',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-      content: 'Dennis has an incredible ability to bridge the gap between design and development. His photography background gives him a great aesthetic sense, and his coding skills bring designs to life beautifully.',
-      rating: 5
-    },
-    {
-      name: 'James Wilson',
-      role: 'Red Cross Coordinator',
-      company: 'Red Cross Kenya',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-      content: 'Dennis is not only an excellent first aider but also brought his tech skills to modernize our training programs. His dedication to community service and innovation makes him a valuable team member.',
-      rating: 5
-    },
-    {
-      name: 'Lisa Thompson',
-      role: 'Startup Founder',
-      company: 'GreenTech Startup',
-      image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face',
-      content: 'Dennis helped us build our MVP in record time. His full-stack expertise and problem-solving approach were exactly what our startup needed. Highly recommend for any web development project.',
-      rating: 5
-    }
-  ];
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -68,6 +38,27 @@ const TestimonialsSection = () => {
   }, []);
 
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*')
+        .eq('published', true)
+        .order('display_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching testimonials:', error);
+      } else {
+        setTestimonials(data || []);
+      }
+      setIsLoading(false);
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
+    
     const interval = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
@@ -82,6 +73,35 @@ const TestimonialsSection = () => {
   const prevTestimonial = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
+
+  if (isLoading) {
+    return (
+      <section id="testimonials" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">Loading testimonials...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (testimonials.length === 0) {
+    return (
+      <section id="testimonials" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
+              What People <span className="text-primary">Say</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Testimonials coming soon! Check back later for feedback from colleagues, clients, and fellow volunteers.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const currentData = testimonials[currentTestimonial];
 
@@ -104,7 +124,7 @@ const TestimonialsSection = () => {
               <div className="text-center">
                 {/* Stars */}
                 <div className="flex justify-center space-x-1 mb-6">
-                  {[...Array(currentData.rating)].map((_, i) => (
+                  {[...Array(currentData.rating || 5)].map((_, i) => (
                     <Star key={i} className="h-5 w-5 fill-primary text-primary" />
                   ))}
                 </div>
@@ -117,7 +137,7 @@ const TestimonialsSection = () => {
                 {/* Author info */}
                 <div className="flex items-center justify-center space-x-4 mb-8">
                   <Avatar className="h-16 w-16 border-2 border-primary">
-                    <AvatarImage src={currentData.image} alt={currentData.name} />
+                    <AvatarImage src={currentData.avatar_url || undefined} alt={currentData.name} />
                     <AvatarFallback>{currentData.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                   </Avatar>
                   <div className="text-left">

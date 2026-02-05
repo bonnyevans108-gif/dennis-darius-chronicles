@@ -3,9 +3,23 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string | null;
+  image_url: string | null;
+  technologies: string[] | null;
+  live_url: string | null;
+  github_url: string | null;
+  featured: boolean | null;
+}
 
 const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,59 +37,54 @@ const ProjectsSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
-    {
-      title: 'Social Media App',
-      description: 'React.js social media application design. Built using React functional components and React Hooks for a modern, responsive social platform.',
-      image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop',
-      technologies: ['React', 'JavaScript', 'CSS', 'Hooks'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/Socia-Media-App',
-      featured: true
-    },
-    {
-      title: 'Recipe Finder',
-      description: 'A web application that allows users to search for recipes and add comments to share their thoughts and feedback.',
-      image: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=600&h=400&fit=crop',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'API'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/RECIPE-FINDER',
-      featured: true
-    },
-    {
-      title: 'DDS Kitchen',
-      description: 'Experience the ultimate culinary journey at DDS Kitchen—Australia\'s finest dining destination. Exquisite flavors crafted with passion.',
-      image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/DDS-KITCHEN',
-      featured: true
-    },
-    {
-      title: 'Pizza Restaurants API',
-      description: 'Flask-based API for managing pizza restaurants and their menus. Provides endpoints for CRUD operations on restaurants, pizzas, and associations.',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop',
-      technologies: ['Python', 'Flask', 'SQLAlchemy', 'REST API'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/PIZZA-RESTAURANTS'
-    },
-    {
-      title: 'Unheard',
-      description: 'Providing alternative perspectives on political discourse since 2023. A platform for diverse voices and viewpoints.',
-      image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/unheard'
-    },
-    {
-      title: 'Chef Clinton',
-      description: 'A professional chef portfolio website showcasing culinary expertise and services.',
-      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=400&fit=crop',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/mukoyadariu/CHEF-CLINTON'
-    }
-  ];
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('published', true)
+        .order('display_order', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching projects:', error);
+      } else {
+        setProjects(data || []);
+      }
+      setIsLoading(false);
+    };
+
+    fetchProjects();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <section id="projects" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center">
+            <div className="animate-pulse">Loading projects...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (projects.length === 0) {
+    return (
+      <section id="projects" className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
+              Featured <span className="text-primary">Projects</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Projects coming soon! Check back later for web applications, photography projects, 
+              and community service initiatives.
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="projects" className="py-20 bg-muted/30">
@@ -93,7 +102,7 @@ const ProjectsSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <Card
-              key={project.title}
+              key={project.id}
               className={`hero-card border-border/50 backdrop-blur-sm overflow-hidden group ${
                 project.featured ? 'md:col-span-2 lg:col-span-1' : ''
               } ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}
@@ -101,7 +110,7 @@ const ProjectsSection = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={project.image}
+                  src={project.image_url || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop'}
                   alt={project.title}
                   className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
@@ -122,7 +131,7 @@ const ProjectsSection = () => {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
+                  {(project.technologies || []).map((tech) => (
                     <Badge key={tech} variant="secondary" className="skill-badge text-xs">
                       {tech}
                     </Badge>
@@ -132,14 +141,22 @@ const ProjectsSection = () => {
 
               <CardFooter className="p-6 pt-0">
                 <div className="flex gap-4 w-full">
-                  <Button size="sm" className="flex-1 group">
-                    <ExternalLink className="mr-2 h-4 w-4 group-hover:rotate-45 transition-transform" />
-                    Live Demo
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex-1 group">
-                    <Github className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
-                    Code
-                  </Button>
+                  {project.live_url && (
+                    <Button size="sm" className="flex-1 group" asChild>
+                      <a href={project.live_url} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4 group-hover:rotate-45 transition-transform" />
+                        Live Demo
+                      </a>
+                    </Button>
+                  )}
+                  {project.github_url && (
+                    <Button variant="outline" size="sm" className="flex-1 group" asChild>
+                      <a href={project.github_url} target="_blank" rel="noopener noreferrer">
+                        <Github className="mr-2 h-4 w-4 group-hover:rotate-12 transition-transform" />
+                        Code
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </CardFooter>
             </Card>
