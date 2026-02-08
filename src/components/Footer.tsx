@@ -40,7 +40,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-card border-t border-border">
+    <footer className="border-t border-border" style={{ background: 'linear-gradient(135deg, hsl(270 61% 28% / 0.1), hsl(355 56% 64% / 0.08))' }}>
       {/* Partnership Section */}
       <div className="py-12 border-b border-border">
         <div className="container mx-auto px-4">
@@ -149,7 +149,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="py-6 border-t border-border bg-muted/30">
+      <div className="py-6 border-t border-border gradient-section-alt">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="text-sm text-muted-foreground">

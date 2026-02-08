@@ -53,15 +53,16 @@ const Navigation = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-background/80 backdrop-blur-lg border-b border-border shadow-lg' 
+          ? 'backdrop-blur-lg border-b border-border shadow-lg' 
           : 'bg-transparent'
       }`}
+      style={isScrolled ? { background: 'linear-gradient(135deg, hsl(270 61% 28% / 0.85), hsl(355 56% 64% / 0.85))' } : undefined}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="font-bold text-xl glow-text">
-            Darius<span className="text-primary">Mukoya</span>
+          <div className={`font-bold text-xl ${isScrolled ? 'text-white' : 'glow-text'}`}>
+            Darius<span className={isScrolled ? 'text-white/80' : 'text-primary'}>Mukoya</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -70,7 +71,9 @@ const Navigation = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="animated-underline text-foreground hover:text-primary transition-colors duration-300"
+                className={`animated-underline transition-colors duration-300 ${
+                  isScrolled ? 'text-white/90 hover:text-white' : 'text-foreground hover:text-primary'
+                }`}
               >
                 {item.name}
               </button>

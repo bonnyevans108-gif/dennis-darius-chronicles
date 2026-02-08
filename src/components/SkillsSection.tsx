@@ -86,7 +86,7 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="py-20">
+    <section id="skills" className="py-20 gradient-section-alt">
       <div className="container mx-auto px-4">
         <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
