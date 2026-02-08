@@ -76,7 +76,7 @@ const TestimonialsSection = () => {
 
   if (isLoading) {
     return (
-      <section id="testimonials" className="py-20 bg-muted/30">
+      <section id="testimonials" className="py-20 gradient-section">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="animate-pulse">Loading testimonials...</div>
@@ -88,7 +88,7 @@ const TestimonialsSection = () => {
 
   if (testimonials.length === 0) {
     return (
-      <section id="testimonials" className="py-20 bg-muted/30">
+      <section id="testimonials" className="py-20 gradient-section">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
   const currentData = testimonials[currentTestimonial];
 
   return (
-    <section id="testimonials" className="py-20 bg-muted/30">
+    <section id="testimonials" className="py-20 gradient-section">
       <div className="container mx-auto px-4">
         <div className={`text-center mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">

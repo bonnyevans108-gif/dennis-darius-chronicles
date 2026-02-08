@@ -55,7 +55,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-20">
+    <section id="contact" className="py-20 gradient-section">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">

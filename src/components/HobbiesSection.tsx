@@ -106,7 +106,7 @@ const HobbiesSection = () => {
   ];
 
   return (
-    <section id="hobbies" className="py-20 bg-background">
+    <section id="hobbies" className="py-20 gradient-section-alt">
       <div className="container mx-auto px-6">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl font-bold text-foreground mb-4">

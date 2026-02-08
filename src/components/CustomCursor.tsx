@@ -12,10 +12,8 @@ const CustomCursor = () => {
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
 
-    // Add mouse move listener
     document.addEventListener('mousemove', updatePosition);
 
-    // Add hover listeners to interactive elements
     const interactiveElements = document.querySelectorAll('a, button, [role="button"]');
     interactiveElements.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter);
@@ -33,15 +31,28 @@ const CustomCursor = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 pointer-events-none z-50 transition-all duration-300 ${
-        isHovering ? 'scale-150' : 'scale-100'
-      }`}
+      className="fixed top-0 left-0 pointer-events-none z-50"
       style={{
-        transform: `translate(${position.x - 16}px, ${position.y - 16}px)`,
+        transform: `translate(${position.x - 24}px, ${position.y - 10}px)`,
       }}
     >
-      <div className="w-8 h-8 bg-primary/20 border border-primary rounded-full backdrop-blur-sm animate-pulse" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary rounded-full" />
+      <span
+        className={`font-bold tracking-wider select-none transition-all duration-300 ${
+          isHovering ? 'text-base opacity-100' : 'text-sm opacity-90'
+        }`}
+        style={{
+          background: 'linear-gradient(135deg, hsl(270 61% 28%), hsl(355 56% 64%))',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          textShadow: 'none',
+          filter: `drop-shadow(0 0 ${isHovering ? '8px' : '4px'} hsl(270 61% 28% / 0.6))`,
+          fontFamily: "'Inter', system-ui, sans-serif",
+          letterSpacing: '0.15em',
+        }}
+      >
+        DARIUS
+      </span>
     </div>
   );
 };
