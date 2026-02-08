@@ -41,12 +41,12 @@ const CustomCursor = () => {
           isHovering ? 'text-base opacity-100' : 'text-sm opacity-90'
         }`}
         style={{
-          background: 'linear-gradient(135deg, hsl(270 61% 28%), hsl(355 56% 64%))',
+          background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
           textShadow: 'none',
-          filter: `drop-shadow(0 0 ${isHovering ? '8px' : '4px'} hsl(270 61% 28% / 0.6))`,
+          filter: `drop-shadow(0 0 ${isHovering ? '8px' : '4px'} hsl(var(--primary) / 0.6))`,
           fontFamily: "'Inter', system-ui, sans-serif",
           letterSpacing: '0.15em',
         }}

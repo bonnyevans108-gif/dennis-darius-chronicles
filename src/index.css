@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    /* Light Mode - Obsidian Plum Gradient (#3A1C71 → #D76D77) */
-    --background: 270 30% 97%;
-    --foreground: 270 40% 12%;
+    /* Light Mode - Emerald Dusk Gradient (#134E5E → #71B280) */
+    --background: 170 20% 96%;
+    --foreground: 193 50% 12%;
     
-    --primary: 270 61% 28%;
+    --primary: 193 66% 22%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 355 56% 64%;
+    --primary-glow: 134 30% 57%;
     
-    --secondary: 270 20% 93%;
-    --secondary-foreground: 270 40% 12%;
+    --secondary: 170 15% 92%;
+    --secondary-foreground: 193 50% 12%;
     
-    --accent: 355 56% 64%;
+    --accent: 134 30% 57%;
     --accent-foreground: 0 0% 100%;
     
-    --muted: 270 15% 94%;
-    --muted-foreground: 270 10% 45%;
+    --muted: 170 12% 93%;
+    --muted-foreground: 193 15% 40%;
     
-    --card: 270 20% 98%;
-    --card-foreground: 270 40% 12%;
+    --card: 170 15% 97%;
+    --card-foreground: 193 50% 12%;
     
-    --border: 270 15% 88%;
-    --input: 270 15% 88%;
-    --ring: 270 61% 28%;
+    --border: 170 12% 86%;
+    --input: 170 12% 86%;
+    --ring: 193 66% 22%;
     
-    /* Portfolio specific colors - Obsidian Plum */
-    --hero-gradient: linear-gradient(135deg, hsl(270 61% 28%), hsl(355 56% 64%));
-    --hero-shadow: 0 20px 60px -10px hsl(270 61% 28% / 0.3);
-    --liquid-glow: 0 0 40px hsl(270 61% 28% / 0.4);
-    --text-glow: 0 0 20px hsl(270 61% 28% / 0.5);
+    /* Portfolio specific colors - Emerald Dusk */
+    --hero-gradient: linear-gradient(135deg, hsl(193 66% 22%), hsl(134 30% 57%));
+    --hero-shadow: 0 20px 60px -10px hsl(193 66% 22% / 0.3);
+    --liquid-glow: 0 0 40px hsl(193 66% 22% / 0.4);
+    --text-glow: 0 0 20px hsl(193 66% 22% / 0.5);
     
     /* Gradient backgrounds */
-    --gradient-plum: linear-gradient(135deg, hsl(270 61% 28%), hsl(310 50% 45%), hsl(355 56% 64%));
-    --gradient-plum-soft: linear-gradient(135deg, hsl(270 61% 28% / 0.1), hsl(355 56% 64% / 0.1));
-    --gradient-plum-medium: linear-gradient(135deg, hsl(270 61% 28% / 0.15), hsl(355 56% 64% / 0.15));
+    --gradient-plum: linear-gradient(135deg, hsl(193 66% 22%), hsl(160 40% 38%), hsl(134 30% 57%));
+    --gradient-plum-soft: linear-gradient(135deg, hsl(193 66% 22% / 0.08), hsl(134 30% 57% / 0.08));
+    --gradient-plum-medium: linear-gradient(135deg, hsl(193 66% 22% / 0.12), hsl(134 30% 57% / 0.12));
     
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -47,8 +47,8 @@
     
     --radius: 1rem;
 
-    --popover: 270 20% 98%;
-    --popover-foreground: 270 40% 12%;
+    --popover: 170 15% 97%;
+    --popover-foreground: 193 50% 12%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
   }

@@ -28,8 +28,8 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient - Obsidian Plum */}
-      <div className="absolute inset-0 -z-10" style={{ background: 'linear-gradient(135deg, hsl(270 61% 28% / 0.15), hsl(310 50% 45% / 0.1), hsl(355 56% 64% / 0.15))' }} />
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10" style={{ background: 'var(--gradient-plum-medium)' }} />
       
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden -z-10">
