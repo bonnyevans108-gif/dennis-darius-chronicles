@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface GalleryImage {
   id: string;
@@ -173,27 +174,13 @@ const GalleryManager = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  placeholder="https://..."
-                  required
-                />
-              </div>
-
-              {formData.image_url && (
-                <div className="aspect-video rounded-lg overflow-hidden bg-muted">
-                  <img 
-                    src={formData.image_url} 
-                    alt="Preview" 
-                    className="w-full h-full object-cover"
-                    onError={(e) => (e.currentTarget.style.display = 'none')}
-                  />
-                </div>
-              )}
+              <ImageUpload
+                value={formData.image_url}
+                onChange={(url) => setFormData({ ...formData, image_url: url })}
+                label="Image"
+                id="gallery_image_url"
+                required
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>

@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2, Eye, EyeOff, ExternalLink } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface Project {
   id: string;
@@ -209,15 +210,12 @@ const ProjectsManager = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  placeholder="https://..."
-                />
-              </div>
+              <ImageUpload
+                value={formData.image_url}
+                onChange={(url) => setFormData({ ...formData, image_url: url })}
+                label="Project Image"
+                id="project_image_url"
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="technologies">Technologies (comma-separated)</Label>

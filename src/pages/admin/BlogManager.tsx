@@ -11,6 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
 import { format } from 'date-fns';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface BlogPost {
   id: string;
@@ -229,15 +230,12 @@ const BlogManager = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  placeholder="https://..."
-                />
-              </div>
+              <ImageUpload
+                value={formData.image_url}
+                onChange={(url) => setFormData({ ...formData, image_url: url })}
+                label="Image"
+                id="blog_image_url"
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="tags">Tags (comma-separated)</Label>

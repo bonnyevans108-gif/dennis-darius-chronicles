@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Pencil, Trash2, Eye, EyeOff, Star } from 'lucide-react';
+import ImageUpload from '@/components/admin/ImageUpload';
 
 interface Testimonial {
   id: string;
@@ -215,15 +216,12 @@ const TestimonialsManager = () => {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="avatar_url">Avatar URL</Label>
-                <Input
-                  id="avatar_url"
-                  value={formData.avatar_url}
-                  onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
-                  placeholder="https://..."
-                />
-              </div>
+              <ImageUpload
+                value={formData.avatar_url}
+                onChange={(url) => setFormData({ ...formData, avatar_url: url })}
+                label="Avatar"
+                id="avatar_url"
+              />
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
