@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Camera, Heart, Download, Eye, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { GALLERY_CATEGORIES } from '@/lib/gallery-categories';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -57,7 +58,7 @@ const GallerySection = () => {
     fetchGalleryImages();
   }, []);
 
-  const categories = ['All', ...new Set(galleryImages.map(image => image.category).filter(Boolean) as string[])];
+  const categories = ['All', ...GALLERY_CATEGORIES];
 
   const filteredImages = selectedCategory === 'All' 
     ? galleryImages 
@@ -131,20 +132,31 @@ const GallerySection = () => {
         </div>
 
         {/* Category Filter */}
-        <div className={`flex flex-wrap justify-center gap-4 mb-12 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+        <div className={`flex flex-wrap justify-center gap-3 mb-12 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
           {categories.map((category) => (
             <Button
               key={category}
               variant={selectedCategory === category ? 'hero' : 'outline'}
               size="sm"
               onClick={() => setSelectedCategory(category)}
-              className="transition-all duration-300"
+              className="transition-all duration-300 text-xs sm:text-sm"
             >
-              <Camera className="mr-2 h-4 w-4" />
+              {category === 'All' && <Camera className="mr-1.5 h-3.5 w-3.5" />}
               {category}
             </Button>
           ))}
         </div>
+
+        {/* Empty category message */}
+        {filteredImages.length === 0 && selectedCategory !== 'All' && (
+          <div className="text-center py-16 mb-12">
+            <Camera className="h-12 w-12 mx-auto text-muted-foreground/50 mb-4" />
+            <p className="text-lg text-muted-foreground">
+              No photos in <span className="text-primary font-semibold">{selectedCategory}</span> yet.
+            </p>
+            <p className="text-sm text-muted-foreground/70 mt-1">Check back soon for new additions!</p>
+          </div>
+        )}
 
         {/* Featured Images */}
         <div className="grid lg:grid-cols-3 gap-8 mb-12">

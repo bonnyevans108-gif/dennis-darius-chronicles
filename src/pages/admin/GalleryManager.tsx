@@ -7,9 +7,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react';
+import { Plus, Pencil, Trash2, Eye, EyeOff, Camera, FolderOpen } from 'lucide-react';
 import ImageUpload from '@/components/admin/ImageUpload';
+import { GALLERY_CATEGORIES } from '@/lib/gallery-categories';
 
 interface GalleryImage {
   id: string;
@@ -28,13 +31,22 @@ const GalleryManager = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingImage, setEditingImage] = useState<GalleryImage | null>(null);
+  const [activeFolder, setActiveFolder] = useState<string>('All');
   const { toast } = useToast();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    title: string;
+    description: string;
+    image_url: string;
+    category: string;
+    featured: boolean;
+    published: boolean;
+    display_order: number;
+  }>({
     title: '',
     description: '',
     image_url: '',
-    category: 'General',
+    category: GALLERY_CATEGORIES[0],
     featured: false,
     published: false,
     display_order: 0,
@@ -58,12 +70,19 @@ const GalleryManager = () => {
     fetchImages();
   }, []);
 
+  const filteredImages = activeFolder === 'All'
+    ? images
+    : images.filter(img => img.category === activeFolder);
+
+  const getCategoryCount = (cat: string) =>
+    images.filter(img => img.category === cat).length;
+
   const resetForm = () => {
     setFormData({
       title: '',
       description: '',
       image_url: '',
-      category: 'General',
+      category: activeFolder !== 'All' ? activeFolder : GALLERY_CATEGORIES[0],
       featured: false,
       published: false,
       display_order: 0,
@@ -153,7 +172,7 @@ const GalleryManager = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Gallery</h1>
-          <p className="text-muted-foreground">Manage your image gallery</p>
+          <p className="text-muted-foreground">Manage your image gallery by category</p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={(open) => { setIsDialogOpen(open); if (!open) resetForm(); }}>
           <DialogTrigger asChild>
@@ -195,11 +214,21 @@ const GalleryManager = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="category">Category</Label>
-                  <Input
-                    id="category"
+                  <Select
                     value={formData.category}
-                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  />
+                    onValueChange={(value) => setFormData({ ...formData, category: value })}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {GALLERY_CATEGORIES.map((cat) => (
+                        <SelectItem key={cat} value={cat}>
+                          {cat}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="display_order">Display Order</Label>
@@ -239,17 +268,44 @@ const GalleryManager = () => {
         </Dialog>
       </div>
 
+      {/* Category Folder Tabs */}
+      <div className="flex flex-wrap gap-2">
+        <Button
+          variant={activeFolder === 'All' ? 'default' : 'outline'}
+          size="sm"
+          onClick={() => setActiveFolder('All')}
+        >
+          <FolderOpen className="h-4 w-4 mr-1.5" />
+          All
+          <Badge variant="secondary" className="ml-2 text-xs">{images.length}</Badge>
+        </Button>
+        {GALLERY_CATEGORIES.map((cat) => (
+          <Button
+            key={cat}
+            variant={activeFolder === cat ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setActiveFolder(cat)}
+          >
+            <Camera className="h-4 w-4 mr-1.5" />
+            {cat}
+            <Badge variant="secondary" className="ml-2 text-xs">{getCategoryCount(cat)}</Badge>
+          </Button>
+        ))}
+      </div>
+
       {isLoading ? (
         <div className="text-center py-8">Loading...</div>
-      ) : images.length === 0 ? (
+      ) : filteredImages.length === 0 ? (
         <Card>
           <CardContent className="py-8 text-center text-muted-foreground">
-            No gallery images yet. Add your first one!
+            {activeFolder === 'All'
+              ? 'No gallery images yet. Add your first one!'
+              : `No images in "${activeFolder}" yet. Click "New Image" to add one.`}
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {images.map((image) => (
+          {filteredImages.map((image) => (
             <Card key={image.id} className="overflow-hidden group">
               <div className="aspect-video relative">
                 <img
@@ -264,6 +320,9 @@ const GalleryManager = () => {
                   <Button variant="destructive" size="icon" onClick={() => handleDelete(image.id)}>
                     <Trash2 className="h-4 w-4" />
                   </Button>
+                </div>
+                <div className="absolute top-2 left-2">
+                  <Badge variant="secondary" className="text-xs">{image.category}</Badge>
                 </div>
                 <div className="absolute top-2 right-2">
                   <Button
