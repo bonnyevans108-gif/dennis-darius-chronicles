@@ -16,9 +16,20 @@ const ThemeToggle = () => {
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
+    
+    // Add transition class for smooth theme switch
+    document.documentElement.style.transition = 'background-color 0.5s ease, color 0.5s ease';
+    document.body.style.transition = 'background-color 0.5s ease, background-image 0.5s ease, color 0.5s ease';
+    
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    
+    // Clean up transition after animation completes
+    setTimeout(() => {
+      document.documentElement.style.transition = '';
+      document.body.style.transition = '';
+    }, 600);
   };
 
   return (

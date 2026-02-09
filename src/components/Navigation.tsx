@@ -51,12 +51,12 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
           ? 'backdrop-blur-lg border-b border-border shadow-lg' 
           : 'bg-transparent'
       }`}
-      style={isScrolled ? { background: 'linear-gradient(135deg, hsl(270 61% 28% / 0.85), hsl(355 56% 64% / 0.85))' } : undefined}
+      style={isScrolled ? { background: 'var(--hero-gradient)', opacity: 0.92 } : undefined}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
