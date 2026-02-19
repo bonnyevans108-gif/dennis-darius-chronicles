@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ArrowRight, User, Heart, MessageCircle } from 'lucide-react';
+import { Calendar, Clock, ArrowRight, User, Heart, MessageCircle, Eye } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface BlogPost {
@@ -19,9 +20,11 @@ interface BlogPost {
   likes: number | null;
   comments: number | null;
   featured: boolean | null;
+  views: number | null;
 }
 
 const BlogSection = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -139,7 +142,7 @@ const BlogSection = () => {
                 <img
                   src={post.image_url || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop'}
                   alt={post.title}
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-64 object-contain transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
@@ -182,6 +185,10 @@ const BlogSection = () => {
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center space-x-1">
+                      <Eye className="h-4 w-4" />
+                      <span>{post.views || 0}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
                       <Heart className="h-4 w-4" />
                       <span>{post.likes || 0}</span>
                     </div>
@@ -198,7 +205,7 @@ const BlogSection = () => {
               </CardContent>
 
               <CardFooter>
-                <Button variant="outline" className="w-full group">
+                <Button variant="outline" className="w-full group" onClick={() => navigate(`/blog/${post.id}`)}>
                   Read More
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -221,7 +228,7 @@ const BlogSection = () => {
                 <img
                   src={post.image_url || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&h=400&fit=crop'}
                   alt={post.title}
-                  className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-48 object-contain transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <Badge variant="secondary" className="absolute top-4 right-4">
@@ -261,6 +268,10 @@ const BlogSection = () => {
                 <div className="flex items-center justify-between text-sm text-muted-foreground">
                   <div className="flex items-center space-x-3">
                     <div className="flex items-center space-x-1">
+                      <Eye className="h-4 w-4" />
+                      <span>{post.views || 0}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
                       <Heart className="h-4 w-4" />
                       <span>{post.likes || 0}</span>
                     </div>
@@ -273,7 +284,7 @@ const BlogSection = () => {
               </CardContent>
 
               <CardFooter>
-                <Button variant="outline" size="sm" className="w-full group">
+                <Button variant="outline" size="sm" className="w-full group" onClick={() => navigate(`/blog/${post.id}`)}>
                   Read More
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
