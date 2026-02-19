@@ -31,6 +31,7 @@ export type Database = {
           tags: string[] | null
           title: string
           updated_at: string
+          views: number | null
         }
         Insert: {
           author?: string
@@ -48,6 +49,7 @@ export type Database = {
           tags?: string[] | null
           title: string
           updated_at?: string
+          views?: number | null
         }
         Update: {
           author?: string
@@ -65,6 +67,7 @@ export type Database = {
           tags?: string[] | null
           title?: string
           updated_at?: string
+          views?: number | null
         }
         Relationships: []
       }
