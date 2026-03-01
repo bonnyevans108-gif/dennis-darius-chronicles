@@ -5,6 +5,7 @@ import {
   FolderKanban, 
   MessageSquare, 
   Image, 
+  Award,
   LogOut,
   Home,
   Settings
@@ -23,6 +24,7 @@ const AdminSidebar = () => {
     { name: 'Projects', href: '/admin/projects', icon: FolderKanban },
     { name: 'Testimonials', href: '/admin/testimonials', icon: MessageSquare },
     { name: 'Gallery', href: '/admin/gallery', icon: Image },
+    { name: 'Certificates', href: '/admin/certificates', icon: Award },
   ];
 
   const isActive = (path: string) => {

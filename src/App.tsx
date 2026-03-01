@@ -16,6 +16,7 @@ import BlogManager from "./pages/admin/BlogManager";
 import ProjectsManager from "./pages/admin/ProjectsManager";
 import TestimonialsManager from "./pages/admin/TestimonialsManager";
 import GalleryManager from "./pages/admin/GalleryManager";
+import CertificatesManager from "./pages/admin/CertificatesManager";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ const App = () => (
               <Route path="projects" element={<ProjectsManager />} />
               <Route path="testimonials" element={<TestimonialsManager />} />
               <Route path="gallery" element={<GalleryManager />} />
+              <Route path="certificates" element={<CertificatesManager />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
