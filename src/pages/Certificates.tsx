@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { ArrowLeft, Award, ExternalLink, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Award, ExternalLink, X, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,75 +8,34 @@ import { Link } from 'react-router-dom';
 import CustomCursor from '@/components/CustomCursor';
 
 interface Certificate {
-  id: number;
+  id: string;
   title: string;
   issuer: string;
   date: string;
   category: string;
-  image: string;
+  image_url: string;
   description: string;
 }
 
-const certificates: Certificate[] = [
-  {
-    id: 1,
-    title: "First Aid & CPR Certification",
-    issuer: "Kenya Red Cross Society",
-    date: "2023",
-    category: "Health & Safety",
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=600&h=400&fit=crop",
-    description: "Certified in basic first aid, CPR, and emergency response procedures."
-  },
-  {
-    id: 2,
-    title: "Web Development Fundamentals",
-    issuer: "Moringa School",
-    date: "2024",
-    category: "Technology",
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=400&fit=crop",
-    description: "Comprehensive training in HTML, CSS, JavaScript, and responsive design."
-  },
-  {
-    id: 3,
-    title: "React.js Professional",
-    issuer: "Udemy",
-    date: "2024",
-    category: "Technology",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=400&fit=crop",
-    description: "Advanced React.js concepts including hooks, context, and state management."
-  },
-  {
-    id: 4,
-    title: "Python Programming",
-    issuer: "Coursera",
-    date: "2024",
-    category: "Technology",
-    image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=600&h=400&fit=crop",
-    description: "Python fundamentals, data structures, and Flask web framework."
-  },
-  {
-    id: 5,
-    title: "Photography Masterclass",
-    issuer: "Creative Arts Institute",
-    date: "2023",
-    category: "Creative",
-    image: "https://images.unsplash.com/photo-1502982720700-bfff97f2ecac?w=600&h=400&fit=crop",
-    description: "Portrait photography, lighting techniques, and post-processing skills."
-  },
-  {
-    id: 6,
-    title: "Digital Marketing Basics",
-    issuer: "Google Digital Garage",
-    date: "2023",
-    category: "Marketing",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-    description: "SEO, social media marketing, and content strategy fundamentals."
-  }
-];
 
 const Certificates = () => {
+  const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const [filter, setFilter] = useState<string>('All');
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCertificates = async () => {
+      const { data } = await supabase
+        .from('certificates')
+        .select('*')
+        .eq('published', true)
+        .order('display_order', { ascending: true });
+      if (data) setCertificates(data as unknown as Certificate[]);
+      setIsLoading(false);
+    };
+    fetchCertificates();
+  }, []);
 
   const categories = ['All', ...new Set(certificates.map(c => c.category))];
   
@@ -148,7 +108,7 @@ const Certificates = () => {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <img 
-                    src={cert.image} 
+                    src={cert.image_url} 
                     alt={cert.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -197,7 +157,7 @@ const Certificates = () => {
           >
             <div className="relative">
               <img 
-                src={selectedCert.image} 
+                src={selectedCert.image_url} 
                 alt={selectedCert.title}
                 className="w-full aspect-video object-cover"
               />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, FolderKanban, MessageSquare, Image, Eye, TrendingUp } from 'lucide-react';
+import { FileText, FolderKanban, MessageSquare, Image, Eye, Award } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface Stats {
@@ -8,6 +8,7 @@ interface Stats {
   projects: { total: number; published: number };
   testimonials: { total: number; published: number };
   galleryImages: { total: number; published: number };
+  certificates: { total: number; published: number };
 }
 
 const Dashboard = () => {
@@ -16,17 +17,19 @@ const Dashboard = () => {
     projects: { total: 0, published: 0 },
     testimonials: { total: 0, published: 0 },
     galleryImages: { total: 0, published: 0 },
+    certificates: { total: 0, published: 0 },
   });
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const [blogRes, projectsRes, testimonialsRes, galleryRes] = await Promise.all([
+        const [blogRes, projectsRes, testimonialsRes, galleryRes, certsRes] = await Promise.all([
           supabase.from('blog_posts').select('id, published'),
           supabase.from('projects').select('id, published'),
           supabase.from('testimonials').select('id, published'),
           supabase.from('gallery_images').select('id, published'),
+          supabase.from('certificates').select('id, published'),
         ]);
 
         setStats({
@@ -45,6 +48,10 @@ const Dashboard = () => {
           galleryImages: {
             total: galleryRes.data?.length || 0,
             published: galleryRes.data?.filter(p => p.published).length || 0,
+          },
+          certificates: {
+            total: certsRes.data?.length || 0,
+            published: certsRes.data?.filter(p => p.published).length || 0,
           },
         });
       } catch (error) {
@@ -93,6 +100,15 @@ const Dashboard = () => {
       href: '/admin/gallery',
       color: 'text-orange-500',
       bgColor: 'bg-orange-500/10',
+    },
+    {
+      title: 'Certificates',
+      icon: Award,
+      total: stats.certificates.total,
+      published: stats.certificates.published,
+      href: '/admin/certificates',
+      color: 'text-yellow-500',
+      bgColor: 'bg-yellow-500/10',
     },
   ];
 

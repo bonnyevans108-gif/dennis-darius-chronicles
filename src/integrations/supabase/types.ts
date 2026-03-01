@@ -71,6 +71,48 @@ export type Database = {
         }
         Relationships: []
       }
+      certificates: {
+        Row: {
+          category: string | null
+          created_at: string
+          date: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          issuer: string | null
+          published: boolean | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          issuer?: string | null
+          published?: boolean | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          date?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          issuer?: string | null
+          published?: boolean | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       gallery_images: {
         Row: {
           category: string | null
