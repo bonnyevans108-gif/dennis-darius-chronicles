@@ -127,9 +127,14 @@ const Certificates = () => {
                   <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
                     {cert.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground mb-2">
                     {cert.issuer} • {cert.date}
                   </p>
+                  {cert.description && (
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {cert.description}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             ))}
