@@ -188,6 +188,11 @@ const TestimonialsSection = () => {
           </Card>
         </div>
 
+        {/* Submission Form */}
+        <div className={`mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+          <TestimonialForm />
+        </div>
+
         {/* Stats */}
         <div className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.5s' }}>
           {[
