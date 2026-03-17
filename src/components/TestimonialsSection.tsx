@@ -95,9 +95,10 @@ const TestimonialsSection = () => {
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
               What People <span className="text-primary">Say</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Testimonials coming soon! Check back later for feedback from colleagues, clients, and fellow volunteers.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
+              Be the first to share your experience!
             </p>
+            <TestimonialForm />
           </div>
         </div>
       </section>
