@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import TestimonialForm from './TestimonialForm';
 
 interface Testimonial {
   id: string;
@@ -94,9 +95,10 @@ const TestimonialsSection = () => {
             <h2 className="text-4xl lg:text-5xl font-bold mb-6 glow-text">
               What People <span className="text-primary">Say</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Testimonials coming soon! Check back later for feedback from colleagues, clients, and fellow volunteers.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-12">
+              Be the first to share your experience!
             </p>
+            <TestimonialForm />
           </div>
         </div>
       </section>
@@ -185,6 +187,11 @@ const TestimonialsSection = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Submission Form */}
+        <div className={`mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.3s' }}>
+          <TestimonialForm />
         </div>
 
         {/* Stats */}
