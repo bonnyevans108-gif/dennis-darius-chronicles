@@ -14,6 +14,7 @@ const TestimonialForm = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [hoveredStar, setHoveredStar] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     role: '',
