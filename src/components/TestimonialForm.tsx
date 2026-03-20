@@ -175,16 +175,50 @@ const TestimonialForm = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="pub-avatar">Avatar URL</Label>
-              <Input
-                id="pub-avatar"
-                placeholder="https://example.com/photo.jpg"
-                value={formData.avatar_url}
-                onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
-                maxLength={500}
-              />
+              <Label>Your Photo</Label>
+              <div className="flex items-center gap-3">
+                {formData.avatar_url ? (
+                  <div className="relative">
+                    <img
+                      src={formData.avatar_url}
+                      alt="Avatar preview"
+                      className="h-12 w-12 rounded-full object-cover border-2 border-border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, avatar_url: '' })}
+                      className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground rounded-full p-0.5"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-muted border-2 border-dashed border-border flex items-center justify-center">
+                    <Upload className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                )}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleAvatarUpload}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Uploading...</>
+                  ) : (
+                    <><Upload className="h-4 w-4 mr-2" />Upload Photo</>
+                  )}
+                </Button>
+              </div>
             </div>
-          </div>
 
           <div className="space-y-2">
             <Label htmlFor="pub-content">Your Testimonial *</Label>
