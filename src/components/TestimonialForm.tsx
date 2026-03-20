@@ -219,6 +219,7 @@ const TestimonialForm = () => {
                 </Button>
               </div>
             </div>
+          </div>
 
           <div className="space-y-2">
             <Label htmlFor="pub-content">Your Testimonial *</Label>
