@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Star, Send } from 'lucide-react';
+import { Star, Send, Upload, Loader2, X } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 const TestimonialForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [hoveredStar, setHoveredStar] = useState(0);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     role: '',
@@ -24,6 +26,38 @@ const TestimonialForm = () => {
 
   const handleStarClick = (star: number) => {
     setFormData((prev) => ({ ...prev, rating: star }));
+  };
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      toast({ title: 'Invalid file', description: 'Please select an image file.', variant: 'destructive' });
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast({ title: 'File too large', description: 'Image must be less than 5MB.', variant: 'destructive' });
+      return;
+    }
+    setIsUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `testimonials/${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const { error: uploadError } = await supabase.storage
+        .from('admin-uploads')
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+      if (uploadError) throw uploadError;
+      const { data: { publicUrl } } = supabase.storage
+        .from('admin-uploads')
+        .getPublicUrl(fileName);
+      setFormData((prev) => ({ ...prev, avatar_url: publicUrl }));
+      toast({ title: 'Uploaded!', description: 'Your photo has been uploaded.' });
+    } catch (error: any) {
+      toast({ title: 'Upload failed', description: error.message, variant: 'destructive' });
+    } finally {
+      setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -141,14 +175,49 @@ const TestimonialForm = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="pub-avatar">Avatar URL</Label>
-              <Input
-                id="pub-avatar"
-                placeholder="https://example.com/photo.jpg"
-                value={formData.avatar_url}
-                onChange={(e) => setFormData({ ...formData, avatar_url: e.target.value })}
-                maxLength={500}
-              />
+              <Label>Your Photo</Label>
+              <div className="flex items-center gap-3">
+                {formData.avatar_url ? (
+                  <div className="relative">
+                    <img
+                      src={formData.avatar_url}
+                      alt="Avatar preview"
+                      className="h-12 w-12 rounded-full object-cover border-2 border-border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, avatar_url: '' })}
+                      className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground rounded-full p-0.5"
+                    >
+                      <X className="h-3 w-3" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-muted border-2 border-dashed border-border flex items-center justify-center">
+                    <Upload className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                )}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleAvatarUpload}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Uploading...</>
+                  ) : (
+                    <><Upload className="h-4 w-4 mr-2" />Upload Photo</>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
 
