@@ -62,7 +62,7 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg text-muted-foreground max-w-md leading-relaxed">
-                Welcome to my creative space! Here, technology meets artistry and compassion. Building meaningful digital experiences at Pwani University.
+                Software engineer building production-ready web applications with React, TypeScript, and Python. Available for full-time roles, contracts, and freelance projects.
               </p>
             </div>
 
