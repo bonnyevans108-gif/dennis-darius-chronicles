@@ -26,9 +26,9 @@ const EducationSection = () => {
     {
       degree: "Diploma in Computer Science",
       institution: "Pwani University",
-      period: "2024 - Present",
+      period: "2024 - 2026",
       location: "Kilifi, Kenya",
-      grade: "In Progress",
+      grade: "Completed",
       description: "Currently pursuing advanced studies in computer science with focus on software development, algorithms, and modern technologies. Building strong foundation in programming and system design.",
       achievements: ["Dean's List", "Programming Excellence Award", "Tech Innovation Project"],
       coursework: ["Advanced Programming", "Data Structures", "Software Engineering", "Database Management", "Web Development"]
