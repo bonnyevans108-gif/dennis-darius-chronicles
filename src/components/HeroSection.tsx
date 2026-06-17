@@ -8,11 +8,11 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const roles = [
-    'Web Developer',
-    'Red Cross First Aider',
-    'Photographer',
     'Software Engineer',
-    'Problem Solver'
+    'Full-Stack Web Developer',
+    'React & Python Specialist',
+    'Certified First Aider',
+    'Professional Photographer'
   ];
 
   useEffect(() => {
@@ -62,14 +62,14 @@ const HeroSection = () => {
               </div>
               
               <p className="text-lg text-muted-foreground max-w-md leading-relaxed">
-                Welcome to my creative space! Here, technology meets artistry and compassion. Building meaningful digital experiences at Pwani University.
+                Software engineer building production-ready web applications with React, TypeScript, and Python. Available for full-time roles, contracts, and freelance projects.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="lg" className="group">
+              <Button variant="hero" size="lg" className="group" onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}>
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Get In Touch
+                Hire Me
               </Button>
               <Button variant="outline" size="lg" className="group" asChild>
                 <a href="/DENNIS_MUKOYA_CV.docx" download>

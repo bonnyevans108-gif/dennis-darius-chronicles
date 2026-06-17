@@ -26,26 +26,26 @@ const AboutSection = () => {
     {
       icon: Code,
       title: 'Web Development',
-      description: 'Crafting modern, responsive web applications with HTML, CSS, JavaScript, React, and Python.',
-      skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Python', 'Flask']
+      description: 'Building scalable, production-ready web applications with React, TypeScript, Python, and modern cloud tooling.',
+      skills: ['React', 'TypeScript', 'Node.js', 'Python', 'Flask', 'PostgreSQL']
     },
     {
       icon: Heart,
-      title: 'Red Cross First Aid',
-      description: 'Certified first aider passionate about helping others in emergency situations.',
-      skills: ['CPR', 'Emergency Response', 'Community Service', 'Training']
+      title: 'Certified First Aider',
+      description: 'Red Cross certified first responder — bringing calm decision-making and reliability under pressure to every team.',
+      skills: ['CPR', 'Emergency Response', 'Leadership', 'Training']
     },
     {
       icon: Camera,
-      title: 'Photography',
-      description: 'Capturing moments and telling stories through the lens of creativity.',
-      skills: ['Portrait', 'Landscape', 'Event', 'Digital Editing']
+      title: 'Professional Photography',
+      description: 'Commercial and event photographer with a sharp eye for visual storytelling, branding, and content production.',
+      skills: ['Portrait', 'Event', 'Branding', 'Adobe Suite']
     },
     {
       icon: GraduationCap,
-      title: 'Continuous Learning',
-      description: 'Currently studying at Pwani University and Moringa School, always evolving.',
-      skills: ['Problem Solving', 'Innovation', 'Collaboration', 'Mentoring']
+      title: 'Always Shipping',
+      description: 'Continuously learning, contributing to open-source, and shipping side projects. Ready to deliver value from day one.',
+      skills: ['Problem Solving', 'Collaboration', 'Agile', 'Ownership']
     }
   ];
 
@@ -57,9 +57,9 @@ const AboutSection = () => {
             About <span className="text-primary">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I'm Darius Mukoya, a passionate junior web developer studying at Pwani University and Moringa School. 
-            Welcome to my creative space where technology meets artistry and compassion. 
-            I create meaningful digital solutions while serving my community.
+            I'm Darius Mukoya — a software engineer and web developer trained at Moringa School and Pwani University.
+            I build fast, accessible web products with React, TypeScript, and Python, and I'm actively open to full-time,
+            contract, and freelance opportunities where I can ship real impact.
           </p>
         </div>
 
@@ -100,10 +100,10 @@ const AboutSection = () => {
         {/* Personal stats */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
           {[
-            { number: '10+', label: 'Projects Completed' },
-            { number: '2+', label: 'Years Learning' },
-            { number: '100+', label: 'People Helped' },
-            { number: '24/7', label: 'Ready to Code' }
+            { number: '15+', label: 'Projects Shipped' },
+            { number: '3+', label: 'Years Experience' },
+            { number: '20+', label: 'Happy Clients' },
+            { number: '100%', label: 'Client Satisfaction' }
           ].map((stat, index) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl lg:text-4xl font-bold text-primary mb-2 glow-text">
