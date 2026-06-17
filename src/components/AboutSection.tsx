@@ -57,9 +57,9 @@ const AboutSection = () => {
             About <span className="text-primary">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            I'm Darius Mukoya, a passionate junior web developer studying at Pwani University and Moringa School. 
-            Welcome to my creative space where technology meets artistry and compassion. 
-            I create meaningful digital solutions while serving my community.
+            I'm Darius Mukoya — a software engineer and web developer trained at Moringa School and Pwani University.
+            I build fast, accessible web products with React, TypeScript, and Python, and I'm actively open to full-time,
+            contract, and freelance opportunities where I can ship real impact.
           </p>
         </div>
 
