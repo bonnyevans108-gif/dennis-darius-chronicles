@@ -8,11 +8,11 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const roles = [
-    'Web Developer',
-    'Red Cross First Aider',
-    'Photographer',
     'Software Engineer',
-    'Problem Solver'
+    'Full-Stack Web Developer',
+    'React & Python Specialist',
+    'Certified First Aider',
+    'Professional Photographer'
   ];
 
   useEffect(() => {
