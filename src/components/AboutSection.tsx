@@ -100,10 +100,10 @@ const AboutSection = () => {
         {/* Personal stats */}
         <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 ${isVisible ? 'animate-scale-in' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
           {[
-            { number: '10+', label: 'Projects Completed' },
-            { number: '2+', label: 'Years Learning' },
-            { number: '100+', label: 'People Helped' },
-            { number: '24/7', label: 'Ready to Code' }
+            { number: '15+', label: 'Projects Shipped' },
+            { number: '3+', label: 'Years Experience' },
+            { number: '20+', label: 'Happy Clients' },
+            { number: '100%', label: 'Client Satisfaction' }
           ].map((stat, index) => (
             <div key={stat.label} className="text-center">
               <div className="text-3xl lg:text-4xl font-bold text-primary mb-2 glow-text">
