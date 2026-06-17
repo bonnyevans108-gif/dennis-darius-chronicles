@@ -106,11 +106,11 @@ const Certificates = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
                 onClick={() => setSelectedCert(cert)}
               >
-                <div className="relative aspect-[3/2] overflow-hidden">
+                <div className="relative aspect-[3/2] overflow-hidden bg-muted flex items-center justify-center">
                   <img 
                     src={cert.image_url} 
                     alt={cert.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -120,8 +120,8 @@ const Certificates = () => {
                     </Button>
                   </div>
                 </div>
-                <CardContent className="p-4">
-                  <Badge variant="secondary" className="mb-2">
+                <CardContent className="p-4 flex flex-col">
+                  <Badge variant="secondary" className="mb-2 w-fit">
                     {cert.category}
                   </Badge>
                   <h3 className="font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
@@ -131,9 +131,9 @@ const Certificates = () => {
                     {cert.issuer} • {cert.date}
                   </p>
                   {cert.description && (
-                    <p className="text-xs text-muted-foreground line-clamp-2">
+                    <div className="text-xs text-muted-foreground max-h-24 overflow-y-auto pr-1 custom-scrollbar">
                       {cert.description}
-                    </p>
+                    </div>
                   )}
                 </CardContent>
               </Card>
@@ -157,14 +157,14 @@ const Certificates = () => {
           onClick={() => setSelectedCert(null)}
         >
           <div 
-            className="bg-card border border-border rounded-xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-scale-in"
+            className="bg-card border border-border rounded-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in custom-scrollbar"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
               <img 
                 src={selectedCert.image_url} 
                 alt={selectedCert.title}
-                className="w-full aspect-video object-cover"
+                className="w-full object-contain bg-muted"
               />
               <Button
                 variant="secondary"
@@ -183,9 +183,9 @@ const Certificates = () => {
               <p className="text-muted-foreground mb-4">
                 Issued by <span className="text-foreground font-medium">{selectedCert.issuer}</span> • {selectedCert.date}
               </p>
-              <p className="text-muted-foreground">
+              <div className="text-muted-foreground whitespace-pre-wrap">
                 {selectedCert.description}
-              </p>
+              </div>
             </div>
           </div>
         </div>
