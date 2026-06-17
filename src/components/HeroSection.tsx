@@ -67,9 +67,9 @@ const HeroSection = () => {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button variant="hero" size="lg" className="group">
+              <Button variant="hero" size="lg" className="group" onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}>
                 <Mail className="mr-2 h-5 w-5 group-hover:rotate-12 transition-transform" />
-                Get In Touch
+                Hire Me
               </Button>
               <Button variant="outline" size="lg" className="group" asChild>
                 <a href="/DENNIS_MUKOYA_CV.docx" download>
