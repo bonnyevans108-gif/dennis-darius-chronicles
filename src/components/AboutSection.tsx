@@ -26,26 +26,26 @@ const AboutSection = () => {
     {
       icon: Code,
       title: 'Web Development',
-      description: 'Crafting modern, responsive web applications with HTML, CSS, JavaScript, React, and Python.',
-      skills: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Python', 'Flask']
+      description: 'Building scalable, production-ready web applications with React, TypeScript, Python, and modern cloud tooling.',
+      skills: ['React', 'TypeScript', 'Node.js', 'Python', 'Flask', 'PostgreSQL']
     },
     {
       icon: Heart,
-      title: 'Red Cross First Aid',
-      description: 'Certified first aider passionate about helping others in emergency situations.',
-      skills: ['CPR', 'Emergency Response', 'Community Service', 'Training']
+      title: 'Certified First Aider',
+      description: 'Red Cross certified first responder — bringing calm decision-making and reliability under pressure to every team.',
+      skills: ['CPR', 'Emergency Response', 'Leadership', 'Training']
     },
     {
       icon: Camera,
-      title: 'Photography',
-      description: 'Capturing moments and telling stories through the lens of creativity.',
-      skills: ['Portrait', 'Landscape', 'Event', 'Digital Editing']
+      title: 'Professional Photography',
+      description: 'Commercial and event photographer with a sharp eye for visual storytelling, branding, and content production.',
+      skills: ['Portrait', 'Event', 'Branding', 'Adobe Suite']
     },
     {
       icon: GraduationCap,
-      title: 'Continuous Learning',
-      description: 'Currently studying at Pwani University and Moringa School, always evolving.',
-      skills: ['Problem Solving', 'Innovation', 'Collaboration', 'Mentoring']
+      title: 'Always Shipping',
+      description: 'Continuously learning, contributing to open-source, and shipping side projects. Ready to deliver value from day one.',
+      skills: ['Problem Solving', 'Collaboration', 'Agile', 'Ownership']
     }
   ];
 
