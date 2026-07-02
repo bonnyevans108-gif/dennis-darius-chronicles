@@ -30,8 +30,8 @@ const EducationSection = () => {
       location: "Kilifi, Kenya",
       grade: "Completed",
       description: "Currently pursuing advanced studies in computer science with focus on software development, algorithms, and modern technologies. Building strong foundation in programming and system design.",
-      achievements: ["Dean's List", "Programming Excellence Award", "Tech Innovation Project"],
-      coursework: ["Advanced Programming", "Data Structures", "Software Engineering", "Database Management", "Web Development"]
+      achievements: [],
+      coursework: ["Advanced Programming", "Software Engineering", "Database Management", "Web Development"]
     },
     {
       degree: "Certificate in Software Engineering",
