@@ -156,23 +156,25 @@ const EducationSection = () => {
                       </p>
 
                       {/* Achievements */}
-                      <div className="mb-4">
-                        <h4 className={`font-semibold text-foreground mb-3 flex items-center gap-2 ${
-                          isLeft ? 'justify-start' : 'justify-end flex-row-reverse'
-                        }`}>
-                          <div className="w-1 h-4 bg-primary rounded"></div>
-                          Key Achievements
-                        </h4>
-                        <div className={`flex flex-wrap gap-2 ${
-                          isLeft ? 'justify-start' : 'justify-end'
-                        }`}>
-                          {edu.achievements.map((achievement, i) => (
-                            <Badge key={i} variant="outline" className="bg-accent/30 hover:bg-accent/50 transition-colors">
-                              {achievement}
-                            </Badge>
-                          ))}
+                      {edu.achievements.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className={`font-semibold text-foreground mb-3 flex items-center gap-2 ${
+                            isLeft ? 'justify-start' : 'justify-end flex-row-reverse'
+                          }`}>
+                            <div className="w-1 h-4 bg-primary rounded"></div>
+                            Key Achievements
+                          </h4>
+                          <div className={`flex flex-wrap gap-2 ${
+                            isLeft ? 'justify-start' : 'justify-end'
+                          }`}>
+                            {edu.achievements.map((achievement, i) => (
+                              <Badge key={i} variant="outline" className="bg-accent/30 hover:bg-accent/50 transition-colors">
+                                {achievement}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
 
                       {/* Coursework */}
                       <div>
