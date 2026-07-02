@@ -30,8 +30,8 @@ const EducationSection = () => {
       location: "Kilifi, Kenya",
       grade: "Completed",
       description: "Currently pursuing advanced studies in computer science with focus on software development, algorithms, and modern technologies. Building strong foundation in programming and system design.",
-      achievements: ["Dean's List", "Programming Excellence Award", "Tech Innovation Project"],
-      coursework: ["Advanced Programming", "Data Structures", "Software Engineering", "Database Management", "Web Development"]
+      achievements: [],
+      coursework: ["Advanced Programming", "Software Engineering", "Database Management", "Web Development"]
     },
     {
       degree: "Certificate in Software Engineering",
@@ -156,23 +156,25 @@ const EducationSection = () => {
                       </p>
 
                       {/* Achievements */}
-                      <div className="mb-4">
-                        <h4 className={`font-semibold text-foreground mb-3 flex items-center gap-2 ${
-                          isLeft ? 'justify-start' : 'justify-end flex-row-reverse'
-                        }`}>
-                          <div className="w-1 h-4 bg-primary rounded"></div>
-                          Key Achievements
-                        </h4>
-                        <div className={`flex flex-wrap gap-2 ${
-                          isLeft ? 'justify-start' : 'justify-end'
-                        }`}>
-                          {edu.achievements.map((achievement, i) => (
-                            <Badge key={i} variant="outline" className="bg-accent/30 hover:bg-accent/50 transition-colors">
-                              {achievement}
-                            </Badge>
-                          ))}
+                      {edu.achievements.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className={`font-semibold text-foreground mb-3 flex items-center gap-2 ${
+                            isLeft ? 'justify-start' : 'justify-end flex-row-reverse'
+                          }`}>
+                            <div className="w-1 h-4 bg-primary rounded"></div>
+                            Key Achievements
+                          </h4>
+                          <div className={`flex flex-wrap gap-2 ${
+                            isLeft ? 'justify-start' : 'justify-end'
+                          }`}>
+                            {edu.achievements.map((achievement, i) => (
+                              <Badge key={i} variant="outline" className="bg-accent/30 hover:bg-accent/50 transition-colors">
+                                {achievement}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                      </div>
+                      )}
 
                       {/* Coursework */}
                       <div>
