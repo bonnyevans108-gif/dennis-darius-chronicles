@@ -131,7 +131,7 @@ const Certificates = () => {
                     {cert.issuer} • {cert.date}
                   </p>
                   {cert.description && (
-                    <div className="text-xs text-muted-foreground max-h-24 overflow-y-auto pr-1 custom-scrollbar">
+                    <div className="text-sm text-muted-foreground leading-relaxed max-h-32 overflow-y-auto pr-1 custom-scrollbar">
                       {cert.description}
                     </div>
                   )}
@@ -183,7 +183,7 @@ const Certificates = () => {
               <p className="text-muted-foreground mb-4">
                 Issued by <span className="text-foreground font-medium">{selectedCert.issuer}</span> • {selectedCert.date}
               </p>
-              <div className="text-muted-foreground whitespace-pre-wrap">
+              <div className="text-base text-muted-foreground whitespace-pre-wrap leading-relaxed">
                 {selectedCert.description}
               </div>
             </div>
