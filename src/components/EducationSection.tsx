@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 import pwaniLogo from '@/assets/pwani-tvet-logo.png.asset.json';
+import moringaLogo from '@/assets/moringa-logo.png.asset.json';
 
 const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +44,8 @@ const EducationSection = () => {
       grade: "Distinction",
       description: "Intensive software engineering bootcamp focused on full-stack development, modern frameworks, and industry best practices. Gained hands-on experience in building real-world applications.",
       achievements: ["Top Performer", "Best Final Project", "Peer Mentor"],
-      coursework: ["JavaScript", "React", "Python", "Flask", "PostgreSQL", "Git & GitHub"]
+      coursework: ["JavaScript", "React", "Python", "Flask", "PostgreSQL", "Git & GitHub"],
+      logo: moringaLogo.url
     },
     {
       degree: "Certificate in Photography",
