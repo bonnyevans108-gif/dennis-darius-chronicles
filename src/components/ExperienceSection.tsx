@@ -59,8 +59,8 @@ const ExperienceSection = () => {
               <CardContent className="p-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-6">
                   {/* Icon */}
-                  <div className="p-4 rounded-xl bg-primary/10 text-primary shrink-0">
-                    <Briefcase className="w-8 h-8" />
+                  <div className="p-3 rounded-xl bg-white shadow-sm shrink-0 flex items-center justify-center w-20 h-20">
+                    <img src={brsLogo.url} alt="Business Registration Service logo" className="w-full h-full object-contain" />
                   </div>
 
                   <div className="flex-1 space-y-4">
