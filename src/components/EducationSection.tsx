@@ -124,7 +124,7 @@ const EducationSection = () => {
                             {(edu as any).logo ? (
                               <img src={(edu as any).logo} alt={`${edu.institution} logo`} className="w-full h-full object-contain" />
                             ) : (
-                              <GraduationCap className="w-6 h-6" />
+                              <GraduationCap className="w-10 h-10" />
                             )}
                           </div>
                           <div className={isLeft ? 'text-left' : 'text-right'}>
