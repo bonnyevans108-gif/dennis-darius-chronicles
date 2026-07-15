@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
+import pwaniLogo from '@/assets/pwani-tvet-logo.png.asset.json';
 
 const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -31,7 +32,8 @@ const EducationSection = () => {
       grade: "Completed",
       description: "Currently pursuing advanced studies in computer science with focus on software development, algorithms, and modern technologies. Building strong foundation in programming and system design.",
       achievements: [],
-      coursework: ["Advanced Programming", "Software Engineering", "Database Management", "Web Development"]
+      coursework: ["Advanced Programming", "Software Engineering", "Database Management", "Web Development"],
+      logo: pwaniLogo.url
     },
     {
       degree: "Certificate in Software Engineering",
@@ -118,8 +120,12 @@ const EducationSection = () => {
                       {/* Header */}
                       <div className={`flex items-start gap-4 mb-4 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
                         <div className="flex items-center gap-3 flex-1">
-                          <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors">
-                            <GraduationCap className="w-6 h-6" />
+                          <div className="p-2 rounded-xl bg-white text-primary group-hover:bg-white/90 transition-colors shrink-0 flex items-center justify-center w-14 h-14">
+                            {(edu as any).logo ? (
+                              <img src={(edu as any).logo} alt={`${edu.institution} logo`} className="w-full h-full object-contain" />
+                            ) : (
+                              <GraduationCap className="w-6 h-6" />
+                            )}
                           </div>
                           <div className={isLeft ? 'text-left' : 'text-right'}>
                             <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
