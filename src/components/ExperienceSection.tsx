@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Briefcase, Calendar, MapPin, Building2 } from 'lucide-react';
+import { Calendar, MapPin, Building2 } from 'lucide-react';
+import brsLogo from '@/assets/brs-logo.png.asset.json';
 
 const ExperienceSection = () => {
   const [isVisible, setIsVisible] = useState(false);
