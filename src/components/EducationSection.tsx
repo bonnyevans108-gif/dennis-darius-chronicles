@@ -56,7 +56,8 @@ const EducationSection = () => {
       grade: "Certified",
       description: "Professional photography training covering digital photography, photo editing, studio lighting, and commercial photography techniques. Developed creative and technical skills in visual storytelling.",
       achievements: ["Portfolio Excellence", "Creative Vision Award", "Client Satisfaction"],
-      coursework: ["Digital Photography", "Adobe Photoshop", "Lightroom", "Studio Lighting", "Commercial Photography"]
+      coursework: ["Digital Photography", "Adobe Photoshop", "Lightroom", "Studio Lighting", "Commercial Photography"],
+      logo: photomagicLogo.url
     },
     {
       degree: "Kenya Certificate of Secondary Education",
