@@ -44,7 +44,8 @@ const EducationSection = () => {
       grade: "Distinction",
       description: "Intensive software engineering bootcamp focused on full-stack development, modern frameworks, and industry best practices. Gained hands-on experience in building real-world applications.",
       achievements: ["Top Performer", "Best Final Project", "Peer Mentor"],
-      coursework: ["JavaScript", "React", "Python", "Flask", "PostgreSQL", "Git & GitHub"]
+      coursework: ["JavaScript", "React", "Python", "Flask", "PostgreSQL", "Git & GitHub"],
+      logo: moringaLogo.url
     },
     {
       degree: "Certificate in Photography",
