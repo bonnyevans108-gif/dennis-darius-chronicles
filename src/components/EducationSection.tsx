@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { GraduationCap, Calendar, MapPin, Award } from 'lucide-react';
 import pwaniLogo from '@/assets/pwani-tvet-logo.png.asset.json';
+import moringaLogo from '@/assets/moringa-logo.png.asset.json';
 
 const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
