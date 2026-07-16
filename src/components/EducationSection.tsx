@@ -124,9 +124,9 @@ const EducationSection = () => {
                       {/* Header */}
                       <div className={`flex items-start gap-4 mb-4 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
                         <div className="flex items-center gap-3 flex-1">
-                          <div className="p-2 rounded-xl bg-white text-primary group-hover:bg-white/90 transition-colors shrink-0 flex items-center justify-center w-20 h-20">
+                          <div className="rounded-xl bg-white text-primary group-hover:bg-white/90 transition-colors shrink-0 flex items-center justify-center w-20 h-20 overflow-hidden">
                             {(edu as any).logo ? (
-                              <img src={(edu as any).logo} alt={`${edu.institution} logo`} className="w-full h-full object-contain" />
+                              <img src={(edu as any).logo} alt={`${edu.institution} logo`} className="w-full h-full object-contain p-0.5" />
                             ) : (
                               <GraduationCap className="w-10 h-10" />
                             )}
